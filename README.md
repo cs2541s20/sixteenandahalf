@@ -1,9 +1,9 @@
 # DB 2541 - Spring 2020 Project 1
 
 **Team  Name**
- - Name of team member 1 (and github ID)
- - Name of team member 2 (and github ID)
- - Name of team member 3 (and github ID)
+ - Ada Kilic (ayda000)
+ - Cassell Robinson (cassell13)
+ - Sam Gassman (samualgassman7)
  - your gwupyterhub.seas.gwu.edu link to live webpage
  
  ## Important login credentials for your web app
