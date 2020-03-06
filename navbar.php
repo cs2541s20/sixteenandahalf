@@ -1,27 +1,130 @@
 <?php
 
-	$filename = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1); 
+	//$filename = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1); 
+	
+	
+	/*let 'viewtype' refer to a permission level as either:
+		'admin'
+		'gradsec'
+		'faculty'
+		'student'
+		
+	  let 'viewas' refer to the uid of the user we are simulating
+	  
+	  let 'uid' refer to the uid of the logged in user
+	  
+	  if the viewas and uid session variables are equal, then a supervising user is on their account.
+	  Otherwise, the user is viewing a different person's account and we need to create a "Back to my account"
+	  link to allow the user to go back to their actual account.
+	
+	*/
+	if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'admin' && $_SESSION['viewas'] != $_SESSION['uid']){
+		setsysadmin(true);
+	}
+	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'admin' && $_SESSION['viewas'] == $_SESSION['uid']){
+		setsysadmin(false);
+	}
+	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'gradsec' && $_SESSION['viewas'] != $_SESSION['uid']){
+		setgradsec(true);
+	}
+	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'gradsec' && $_SESSION['viewas'] == $_SESSION['uid']){
+		setgradsec(false);
+	}
+	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'faculty' && $_SESSION['viewas'] != $_SESSION['uid']){
+		setfaculty(true);
+	}
+	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'faculty' && $_SESSION['viewas'] == $_SESSION['uid']){
+		setfaculty(false);
+	}
+	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'student' && $_SESSION['viewas'] != $_SESSION['uid']){
+		setstudent(true);
+	}
+	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'student' && $_SESSION['viewas'] == $_SESSION['uid']){
+		setstudent(true);
+	}
+	
+	else{
+		$navbar = array();
+		$navbar[0] = "Not logged in test";
+		$navbar[1] = "#";
+		$_SESSION['navbar'] = $navbar;
+	}
+	
+	function setsysadmin($needsHome){
+		$navbar = array();
+		$navbar[0] = "Home";
+		$navbar[1] = "index.php";
+		$navbar[2] = "My info";
+		$navbar[3] = "personalinfo.php";
+		$navbar[4] = "Log Out";
+		$navbar[5] = "logout.php";
+		$navbar[6] = "Create Accounts";
+		$navbar[7] = "createaccount.php";
+		$navbar[8] = "Other Accounts";
+		$navbar[9] = "otheraccounts.php";
+		if($needsHome == true){
+			$navbar[10] = "Back to my Account";
+			$navbar[11] = "home.php";
+		}
 
-	if(isset($_SESSION['permission']) && $_SESSION['permission'] == 'admin'){
+		$_SESSION['navbar'] = $navbar;
+	}
+
+	
+	function setgradsec($needsHome){
 		$navbar = array();
 		$navbar[0] = "Home";
 		$navbar[1] = "index.php";
 		$navbar[2] = "Log Out";
 		$navbar[3] = "logout.php";
-
+		$navbar[4] = "My info";
+		$navbar[5] = "personalinfo.php";
+		$navbar[6] = "Other Accounts";
+		$navbar[7] = "otheraccounts.php";
+		if($needsHome == true){
+			$navbar[8] = "Back to my Account";
+			$navbar[9] = "home.php";
+		}
 
 		$_SESSION['navbar'] = $navbar;
 	}
-	else{
+	
+	function setfaculty($needsHome){
 		$navbar = array();
 		$navbar[0] = "Home";
 		$navbar[1] = "index.php";
-		$navbar[2] = "Login";
-		$navbar[3] = "login.php";
-		$navbar[4] = "Create an Account";
-		$navbar[5] = "signup.php";
+		$navbar[2] = "My info";
+		$navbar[3] = "personalinfo.php";
+		$navbar[4] = "Log Out";
+		$navbar[5] = "logout.php";
+		$navbar[6] = "My Courses";
+		$navbar[7] = "mycourses.php";
+		if($needsHome == true){
+			$navbar[8] = "Back to my Account";
+			$navbar[9] = "home.php";
+		}
+
 		$_SESSION['navbar'] = $navbar;
 	}
+	
+	function setstudent($needsHome){
+		$navbar = array();
+		$navbar[0] = "Home";
+		$navbar[1] = "index.php";
+		$navbar[2] = "My info";
+		$navbar[3] = "personalinfo.php";
+		$navbar[4] = "Log Out";
+		$navbar[5] = "logout.php";
+		$navbar[6] = "My Grades";
+		$navbar[7] = "mygrades.php";
+		if($needsHome == true){
+			$navbar[8] = "Back to my Account";
+			$navbar[9] = "home.php";
+		}
+
+		$_SESSION['navbar'] = $navbar;
+	}
+
 	
 ?>
 
@@ -48,6 +151,9 @@ function navbar(){
 		var navtr = document.createElement("TR");
 		var navname = <?php echo json_encode($_SESSION['navbar']); ?>;
 		for(var i = 0; i<navname.length; i+=2){
+			if(navname[i+1] == window.href.location){
+				continue;
+			}
 			if(navname[i] != ""){
 				var navtd = document.createElement("TD");
 				var minicontainer = document.createElement("DIV");
@@ -61,7 +167,7 @@ function navbar(){
 				navtr.appendChild(navtd);
 			}
 		}
-		if(loggedin){
+		/*if(loggedin){
 			navtd = document.createElement("TD");
 			var welcomelabel = document.createElement("P");
 			welcomelabel.className = "welcome";
@@ -74,7 +180,7 @@ function navbar(){
 					}?>" + "!";
 			navtd.appendChild(welcomelabel);
 			navtr.appendChild(navtd);
-		}
+		}*/
 		navtable.appendChild(navtr);
 		navdiv.appendChild(navtable);
 		document.body.insertBefore(navdiv, document.body.firstChild);
