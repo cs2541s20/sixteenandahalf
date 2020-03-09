@@ -1,5 +1,5 @@
 <?php
-  //require_once('connectvars.php');
+  require_once('connectvars.php');
   //require_once('header.php');
   //require_once('appvars.php');
   //require_once('navbar.php');
@@ -19,9 +19,9 @@
       $user_id = mysqli_real_escape_string($dbc, trim($_POST['user_id']));
       $user_password = mysqli_real_escape_string($dbc, trim($_POST['password']));
 
-     if (!empty($user_username) && !empty($user_password)) {
+     if (!empty($user_id) && !empty($user_password)) {
         // This is where you query to see if the username password combination
-        //$query = "select * from shopper where username = '$user_username' and password = '$user_password'";
+        $query = "select * from users where uid = '$user_id' and password = '$user_password'";
 	$data = mysqli_query($dbc, $query);
 
         // If The log-in is OK
@@ -40,12 +40,12 @@
         }
         else {
           // The username/password are incorrect so set an error message
-          $error_msg = 'Sorry, you must enter a valid username and password to log in.';
+          $error_msg = 'Sorry, you must enter a valid user id and password to log in.';
         }
       }
       else {
         // The username/password weren't entered so set an error message
-        $error_msg = 'Sorry, you must enter your username and password to log in.';
+        $error_msg = 'Sorry, you must enter your user id and password to log in.';
       }
     }
   
@@ -73,7 +73,7 @@
   }
   else {
     // Confirm the successful log-in
-    echo('<p class="login">You are logged in as ' . $_SESSION['user_id'] . '.</p>');
+    echo('<p class="login">Welcome ' . $row['fname'] . ' '. $row['lname'] .'.</p>');
   }
 ?>
 
