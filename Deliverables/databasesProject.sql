@@ -1,53 +1,27 @@
+DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS student CASCADE;
-DROP TABLE IF EXISTS paststudent CASCADE;
-DROP TABLE IF EXISTS instructor CASCADE;
-DROP TABLE IF EXISTS supervisors CASCADE;
 DROP TABLE IF EXISTS enrollment CASCADE;
 DROP TABLE IF EXISTS course CASCADE;
 DROP TABLE IF EXISTS coursedata CASCADE;
 DROP TABLE IF EXISTS room CASCADE;
 DROP TABLE IF EXISTS prereqs CASCADE;
 DROP TABLE IF EXISTS coreqs CASCADE;
-DROP TABLE IF EXISTS lab CASCADE;
-CREATE TABLE `student` (
+
+CREATE TABLE `users` (
   `uid` int(8) PRIMARY KEY,
-  `address1` varchar(80),
-  `address2` varchar(80),
+  `address` varchar(255),
   `fname` varchar(40),
   `lname` varchar(40),
   `password` varchar(25),
   `email` varchar(40),
+  `permission` varchar(20)
+);
+
+CREATE TABLE `student` (
+  `uid` int(8) PRIMARY KEY,
   `admission` varchar(4),
   `degree` varchar(20),
   `program` varchar(30)
-);
-
-CREATE TABLE `paststudent` (
-  `uid` int(8) PRIMARY KEY,
-  `address1` varchar(80),
-  `address2` varchar(80),
-  `fname` varchar(40),
-  `lname` varchar(40),
-  `program` varchar(30),
-  `password` varchar(25),
-  `email` varchar(40)
-);
-
-CREATE TABLE `instructor` (
-  `uid` int(8) PRIMARY KEY,
-  `address1` varchar(80),
-  `address2` varchar(80),
-  `password` varchar(25),
-  `email` varchar(40)
-);
-
-CREATE TABLE `supervisors` (
-  `uid` int(8) PRIMARY KEY,
-  `address1` varchar(80),
-  `address2` varchar(80),
-  `password` varchar(25),
-  `permission` varchar(20),
-  `email` varchar(40)
 );
 
 CREATE TABLE `enrollment` (
@@ -58,7 +32,7 @@ CREATE TABLE `enrollment` (
   `grade` varchar(12),
   `gradeModified` boolean,
   PRIMARY KEY (`uid`, `crn`)
-);
+); 
 
 CREATE TABLE `course` (
   `crn` int PRIMARY KEY AUTO_INCREMENT,
@@ -142,7 +116,7 @@ INSERT INTO coreqs VALUES (5555, 1222);
 INSERT INTO coreqs VALUES (4444, 1222);
 
 
-INSERT INTO lab VALUES (5555,1333);
-INSERT INTO lab VALUES (4444,1332);
-INSERT INTO lab VALUES (1222,1331);
+INSERT INTO lab VALUES (5555, 1333);
+INSERT INTO lab VALUES (4444, 1332);
+INSERT INTO lab VALUES (1222, 1331);
 
