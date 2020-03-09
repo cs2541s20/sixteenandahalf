@@ -19,7 +19,7 @@
 	
 	*/
 
-	if(isseet($_SESSION['viewtype'])){
+	if(isset($_SESSION['viewtype'])){
 		echo "logged in test success!";
 	}
 	else{
