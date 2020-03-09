@@ -18,6 +18,14 @@
 	  link to allow the user to go back to their actual account.
 	
 	*/
+
+	if(isset($_SESSION['viewtype'])){
+		echo "logged in test success!";
+	}
+	else{
+		echo "logged in test failure..";
+	}
+
 	if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'admin' && $_SESSION['viewas'] != $_SESSION['uid']){
 		setsysadmin(true);
 	}
