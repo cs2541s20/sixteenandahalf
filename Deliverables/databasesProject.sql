@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS coursedata CASCADE;
 DROP TABLE IF EXISTS room CASCADE;
 DROP TABLE IF EXISTS prereqs CASCADE;
 DROP TABLE IF EXISTS coreqs CASCADE;
+DROP TABLE IF EXISTS lab CASCADE;
 
 CREATE TABLE `users` (
   `uid` int(8) PRIMARY KEY,
@@ -36,7 +37,7 @@ CREATE TABLE `enrollment` (
 
 CREATE TABLE `course` (
   `crn` int PRIMARY KEY AUTO_INCREMENT,
-  `day` varchar(5),
+  `day` varchar(10),
   `time` varchar(10),
   `location` varchar(25),
   `section` int
@@ -76,36 +77,36 @@ CREATE TABLE `lab` (
 );
 
 
-INSERT INTO users VALUES (11111111, ‘2121 h st’, ‘John’, ‘Doe’, ‘password’, ‘john@gwu.edu’, ‘student’);
-INSERT INTO users VALUES (22222222, ‘1467 f st’, ‘James’, ‘Taylor’, ‘password’, ‘jt@gwu.edu’, ‘Admin’);
-INSERT INTO users VALUES (33333333, ‘5433 i st’, ‘Frank’, ‘Bolton’, ‘password’, pfrank@gwu.edu’, ‘Admin’);
-INSERT INTO users VALUES (44444444, ‘1212 g st’, ‘Teacher’, ‘Man’, ‘password’, ‘tman@gwu.edu’, ‘Teacher’);
-INSERT INTO users VALUES (55555555, ‘2121 h st’, ‘Cell’, ‘Freeza’, ‘password’, ‘fcell@gwu.edu’, ‘student’);
+INSERT INTO users VALUES (11111111,  '2121 h st', 'John', 'Doe', 'password', 'john@gwu.edu', 'student');
+INSERT INTO users VALUES (22222222, '1467 f st', 'James', 'Taylor', 'password', 'jt@gwu.edu', 'Admin');
+INSERT INTO users VALUES (33333333, '5433 i st', 'Frank', 'Bolton', 'password', 'pfrank@gwu.edu', 'Admin');
+INSERT INTO users VALUES (44444444, '1212 g st', 'Teacher', 'Man', 'password', 'tman@gwu.edu', 'Teacher');
+INSERT INTO users VALUES (55555555, '2121 h st', 'Cell', 'Freeza', 'password', 'fcell@gwu.edu', 'student');
 
 
-INSERT INTO student VALUES (11111111, ‘yes’, ‘Physics’, ‘Undergraduate’);
-INSERT INTO student VALUES (55555555, ‘yes’, ‘Psychology’, ‘Undergraduate’);
+INSERT INTO student VALUES (11111111, 'yes', 'Physics', 'Undergraduate');
+INSERT INTO student VALUES (55555555, 'yes', 'Psychology', 'Undergraduate');
 
 
-INSERT INTO enrollment VALUES (11111111, 1222, ‘Fall’, ‘2021’, ‘Junior’, false);
-INSERT INTO enrollment VALUES (11111111, 5555, ‘Fall’, ‘2021’, ‘Junior’, false);
-INSERT INTO enrollment VALUES (55555555, 1222, ‘Fall’, ‘2023’, ‘Freshman’, false);
-INSERT INTO enrollment VALUES (55555555, 4444, ‘Fall’, ‘2023’, ‘Freshman’, false);
+INSERT INTO enrollment VALUES (11111111, 1222, 'Fall', '2021', 'Junior', false);
+INSERT INTO enrollment VALUES (11111111, 5555, 'Fall', '2021', 'Junior', false);
+INSERT INTO enrollment VALUES (55555555, 1222, 'Fall', '2023', 'Freshman', false);
+INSERT INTO enrollment VALUES (55555555, 4444, 'Fall', '2023', 'Freshman', false);
 
 
-INSERT INTO course VALUES (1222, ‘Monday’, ‘10:30’, ‘Philips 201’, 30);
-INSERT INTO course VALUES (5555, ‘Thursday’, ‘10:30’, ‘Rome 401’, 10);
-INSERT INTO course VALUES (4444, ‘Monday’, ‘11:30’, ‘Thompkins 201’, 30);
+INSERT INTO course VALUES (1222, 'Monday', '10:30', 'Philips 201', 30);
+INSERT INTO course VALUES (5555, 'Thursday', '10:30', 'Rome 401', 10);
+INSERT INTO course VALUES (4444, 'Monday', '11:30', 'Thompkins 201', 30);
 
 
-INSERT INTO coursedata VALUES (1222, 1, ‘Humanities’, ‘Philosophy’, 3, ‘Fall’, 44444444);
-INSERT INTO coursedata VALUES (5555, 2, ‘Physics’, ‘Physics 101’, 4, ‘Fall’, 44444444);
-INSERT INTO coursedata VALUES (4444, 2, ‘Psychology’, ‘Mind 101’, 3, ‘Fall’, 44444444);
+INSERT INTO coursedata VALUES (1222, 1, 'Humanities', 'Philosophy', 3, 'Fall', 44444444);
+INSERT INTO coursedata VALUES (5555, 2, 'Physics', 'Physics 101', 4, 'Fall', 44444444);
+INSERT INTO coursedata VALUES (4444, 2, 'Psychology', 'Mind 101', 3, 'Fall', 44444444);
 
 
-INSERT INTO room VALUES (‘Philips 201’, 45);
-INSERT INTO room VALUES (‘Rome 401’, 50);
-INSERT INTO room VALUES (‘Thompkins 201’, 25);
+INSERT INTO room VALUES ('Philips 201', 45);
+INSERT INTO room VALUES ('Rome 401', 50);
+INSERT INTO room VALUES ('Thompkins 201', 25);
 
 
 INSERT INTO prereqs VALUES (5555, 1222);
