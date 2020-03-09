@@ -52,7 +52,7 @@
 
   // Insert the page header
   $page_title = 'Log In';
-  require_once('header.php');
+  //require_once('header.php');
  // If the session var is empty, show any error message and the log-in form; otherwise confirm the log-in
   if (empty($_SESSION['user_id'])) {
     echo '<p class="error">' . $error_msg . '</p>';
