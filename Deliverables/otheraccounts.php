@@ -11,3 +11,8 @@ require_once("navbar.php");
 
 
 ?>
+
+
+<body onload = "navbar();">
+
+</body>
