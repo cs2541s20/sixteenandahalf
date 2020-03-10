@@ -168,7 +168,7 @@ function navbar(){
 		var navtr = document.createElement("TR");
 		var navname = <?php echo json_encode($_SESSION['navbar']); ?>;
 		for(var i = 0; i<navname.length; i+=2){
-			if(navname[i+1] == window.href.location){
+			if(window.location.href.includes(navname[i+1])){
 				continue;
 			}
 			if(navname[i] != ""){
