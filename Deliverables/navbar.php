@@ -27,31 +27,40 @@
 	}
 
 	if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'admin' && $_SESSION['viewas'] != $_SESSION['uid']){
+		echo "sysadmin true";
 		setsysadmin(true);
 	}
 	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'admin' && $_SESSION['viewas'] == $_SESSION['uid']){
+		echo "sysadmin false";
 		setsysadmin(false);
 	}
 	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'gradsec' && $_SESSION['viewas'] != $_SESSION['uid']){
+		echo "gradsec true";
 		setgradsec(true);
 	}
 	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'gradsec' && $_SESSION['viewas'] == $_SESSION['uid']){
+		echo "gradsec false";
 		setgradsec(false);
 	}
 	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'faculty' && $_SESSION['viewas'] != $_SESSION['uid']){
+		echo "faculty true";
 		setfaculty(true);
 	}
 	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'faculty' && $_SESSION['viewas'] == $_SESSION['uid']){
+		echo "faculty false";
 		setfaculty(false);
 	}
 	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'student' && $_SESSION['viewas'] != $_SESSION['uid']){
+		echo "student false";
 		setstudent(true);
 	}
 	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'student' && $_SESSION['viewas'] == $_SESSION['uid']){
+		echo "student true";
 		setstudent(true);
 	}
 	
 	else{
+		echo "no pages";
 		$navbar = array();
 		$navbar[0] = "Not logged in test";
 		$navbar[1] = "#";
