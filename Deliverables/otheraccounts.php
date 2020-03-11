@@ -59,7 +59,7 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 
 <script>
 	function getUsers(){
-		var numCategories = "<?php
+		var numCategories = '<?php
 				if (isset($_SESSION['returnable'])){
 					echo mysqli_num_rows($_SESSION['unextracteddata']);
 				}
@@ -67,13 +67,13 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 					echo 0;
 				}?>";
 		numCategories = parseInt(numCategories);
-		var category = "<?php
+		var category = <?php
 				if(!empty($returnable)){
 					echo json_encode($returnable);
 					}
 					else{
 						echo "";
-					}?>";
+					}?>;
 		
 		//document.body.appendChild(categoryform);
 		var form = document.createElement("FORM");
