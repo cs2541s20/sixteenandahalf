@@ -45,7 +45,8 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 
 if(isset($_POST['selecteduser'])){
 	$_SESSION['viewas'] = $_POST['selectedUser'];
-	header('Location: index.php');
+	echo "switched to new user";
+	//header('Location: index.php');
 }
 else{
 	echo "not posted";
@@ -98,7 +99,7 @@ else{
 			a.innerHTML = category[i];
 			a.value = category[i][1];
 			a.name = "selecteduser";
-			a.onclick =  function(){console.log(a.name);$('#users').submit();};
+			a.onclick =  function(){console.log(a.name);/*$('#users').submit();*/};
 			a.href = "#";
 			form.appendChild(a);
 		}
