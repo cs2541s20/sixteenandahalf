@@ -41,10 +41,9 @@ require_once("navbar.php");
     <label for="password">Enter password?</label>
     <input type="text" name="password" size="32" /><br />
 
-    <label for="fangspotted">Have you seen my dog Fang?</label>
     <label for="other">Anything else you want to add?</label>
     <textarea name="other"></textarea><br />
-    <input type="submit" value="Create Account" name="Create Accont" /><br/><br/>
+    <input type="submit" value="Create Account" name="Create Account" /><br/><br/>
   </form>
 </body>
 </html>
