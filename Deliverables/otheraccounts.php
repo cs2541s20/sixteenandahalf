@@ -98,7 +98,7 @@ else{
 			a.innerHTML = category[i];
 			a.value = category[i][1];
 			a.name = "selecteduser";
-			a.onclick =  function(){$('#users').submit();};
+			a.onclick =  function(){console.log(a.name);$('#users').submit();};
 			a.href = "#";
 			form.appendChild(a);
 		}
