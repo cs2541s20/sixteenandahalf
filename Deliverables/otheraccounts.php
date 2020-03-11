@@ -83,5 +83,4 @@ require_once("connectvars.php");
 			a.innerHTML = category[i];
 			//a.addEventListener("click", function(){})
 		}
-	}
 </script>
