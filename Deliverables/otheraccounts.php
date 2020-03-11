@@ -21,7 +21,7 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 			die("Connection failed: " . mysqli_connect_error());
 			echo "connection refused";
 		}
-		$query = "select concat(fname, ' ', lname) as name, uid from item where lname like '%" . $trimmedsearch . "%' or uid like '%" . $trimmedsearch . "%'";
+		$query = "select concat(fname, ' ', lname) as name, uid from users where lname like '%" . $trimmedsearch . "%' or uid like '%" . $trimmedsearch . "%'";
 		$data = mysqli_query($dbc, $query);
 		if (!$data) {
     			echo "Error:" .  mysqli_error($dbc);
