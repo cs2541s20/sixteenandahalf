@@ -88,10 +88,10 @@ INSERT INTO student VALUES (11111111, 'yes', 'Physics', 'Undergraduate');
 INSERT INTO student VALUES (55555555, 'yes', 'Psychology', 'Undergraduate');
 
 
-INSERT INTO enrollment VALUES (11111111, 1222, 'Fall', '2021', 'Junior', false);
-INSERT INTO enrollment VALUES (11111111, 5555, 'Fall', '2021', 'Junior', false);
-INSERT INTO enrollment VALUES (55555555, 1222, 'Fall', '2023', 'Freshman', false);
-INSERT INTO enrollment VALUES (55555555, 4444, 'Fall', '2023', 'Freshman', false);
+INSERT INTO enrollment VALUES (11111111, 1222, 'Fall', 'A', 'Junior', false);
+INSERT INTO enrollment VALUES (11111111, 5555, 'Fall', 'B', 'Junior', false);
+INSERT INTO enrollment VALUES (55555555, 1222, 'Fall', 'C', 'Freshman', false);
+INSERT INTO enrollment VALUES (55555555, 4444, 'Fall', 'B', 'Freshman', false);
 
 
 INSERT INTO course VALUES (1222, 'Monday', '10:30', 'Philips 201', 30);
