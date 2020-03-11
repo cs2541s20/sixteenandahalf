@@ -43,7 +43,7 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 }
 
 
-if(isset($_POST['selectedUser'])){
+if(isset($_POST['selectedsser'])){
 	$_SESSION['viewas'] = $_POST['selectedUser'];
 	header('Location: index.php');
 }
