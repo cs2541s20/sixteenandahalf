@@ -95,7 +95,7 @@ if(isset($_POST['selectedUser'])){
 			a.innerHTML = category[i];
 			a.value = category[i][1];
 			a.name = "selecteduser";
-			a.onclick =  $('#users').submit();
+			a.onclick =  function(){$('#users').submit();};
 			a.href = "#";
 			form.appendChild(a);
 		}
