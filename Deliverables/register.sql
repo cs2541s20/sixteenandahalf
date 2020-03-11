@@ -83,35 +83,39 @@ INSERT INTO users VALUES (77777777, '5433 i st', 'Frank', 'Bolton', 'password', 
 INSERT INTO users VALUES (66666666, '1212 g st', 'Teacher', 'Man', 'password', 'tman@gwu.edu', 'teacher');
 INSERT INTO users VALUES (55555555, '2121 h st', 'Cell', 'Freeza', 'password', 'fcell@gwu.edu', 'student');
 INSERT INTO users VALUES (88888888, '8008 c st', 'Billie', 'Holiday', 'password', 'bholiday@gwu.edu', 'student');
-
+INSERT INTO users VALUES (10101010, '1212 g st', 'Bhagi', 'Narahari', 'password', 'narahari@gwu.edu', 'teacher');
+INSERT INTO users VALUES (66666666, '1212 g st', 'Bhagi', 'Narahari', 'password', 'narahari@gwu.edu', 'teacher');
 
 
 INSERT INTO student VALUES (12121212, 'yes', 'Physics', 'Undergraduate');
 INSERT INTO student VALUES (99999999, 'yes', 'Undecided', 'Undergraduate');
-INSERT INTO student VALUES (88888888, 'yes', 'Criminal Justice', 'Undergraduate');
-INSERT INTO student VALUES (55555555, 'yes', 'Undecided', 'Undergraduate');
+INSERT INTO student VALUES (88888888, 'yes', 'Computer Science', 'Undergraduate');
+INSERT INTO student VALUES (55555555, 'yes', 'Criminal Justice', 'Undergraduate');
 
 
 INSERT INTO enrollment VALUES (12121212, 1222, 'Fall', 'A', 'Junior', false);
 INSERT INTO enrollment VALUES (44444444, 4444, 'Fall', 'B', 'Junior', false);
 INSERT INTO enrollment VALUES (55555555, 1222, 'Fall', 'C', 'Freshman', false);
 INSERT INTO enrollment VALUES (88888888, 1018, 'Fall', 'B', 'Freshman', false);
+INSERT INTO enrollment VALUES (88888888, 1009, 'Fall', 'B', 'Freshman', false);
 
 
 INSERT INTO course VALUES (1222, 'Monday', '10:30', 'Philips 201', 30);
 INSERT INTO course VALUES (1018, 'Thursday', '10:30', 'Rome 401', 10);
+INSERT INTO course VALUES (1009, 'Thursday', '10:30', 'Corcoran 110', 10);
 INSERT INTO course VALUES (4444, 'Monday', '11:30', 'Thompkins 201', 30);
 
 
 INSERT INTO coursedata VALUES (1222, 1, 'Humanities', 'Philosophy', 3, 'Fall', 44444444);
 INSERT INTO coursedata VALUES (1018, 2, 'Computer Science', 'CSCI 6461', 4, 'Fall', 88888888);
-INSERT INTO coursedata VALUES (1018, 2, 'Computer Science', 'CSCI 6212', 4, 'Fall', 88888888);
+INSERT INTO coursedata VALUES (1009, 2, 'Computer Science', 'CSCI 6212', 4, 'Fall', 88888888);
 INSERT INTO coursedata VALUES (4444, 2, 'Psychology', 'Mind 101', 3, 'Fall', 44444444);
 
 
 INSERT INTO room VALUES ('Philips 201', 45);
 INSERT INTO room VALUES ('Rome 401', 50);
 INSERT INTO room VALUES ('Thompkins 201', 25);
+INSERT INTO room VALUES ('Corcoran 110', 25);
 
 
 INSERT INTO prereqs VALUES (5555, 1222);
