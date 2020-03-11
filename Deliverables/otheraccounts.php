@@ -67,13 +67,13 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 					echo 0;
 				}?>";
 		numCategories = parseInt(numCategories);
-		var category = <?php
-				if(!empty($category)){
-					echo json_encode($category);
+		var category = "<?php
+				if(!empty($returnable)){
+					echo json_encode($returnable);
 					}
 					else{
 						echo "";
-					}?>;
+					}?>";
 		
 		//document.body.appendChild(categoryform);
 		var form = document.createElement("FORM");
