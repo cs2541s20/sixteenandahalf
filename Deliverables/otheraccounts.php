@@ -43,9 +43,12 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 }
 
 
-if(isset($_POST['selectedsser'])){
+if(isset($_POST['selecteduser'])){
 	$_SESSION['viewas'] = $_POST['selectedUser'];
 	header('Location: index.php');
+}
+else{
+	echo "not posted";
 }
 
 
