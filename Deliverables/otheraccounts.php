@@ -1,4 +1,9 @@
 <?php
+$row['hi'];
+
+?>
+
+<?php
 
 /*testing variables: TODO delete later
  *
@@ -12,7 +17,7 @@ require_once("navbar.php");
 require_once("connectvars.php");
 
 
-/*if(isset($_POST['search']) && !empty($_POST['search'])){
+if(isset($_POST['search']) && !empty($_POST['search'])){
 		$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 		$trimmedsearch = mysqli_real_escape_string($dbc, trim($_POST['search']));
 		$_SESSION['search'] = $trimmedsearch;
@@ -21,12 +26,12 @@ require_once("connectvars.php");
 			die("Connection failed: " . mysqli_connect_error());
 			echo "connection refused";
 		}
-		$query = "select * from item where name like '%" . $trimmedsearch . "%'" or uid like '%" . $trimmedsearch . "%'";
+		$query = "select * from item where name like '%" . $trimmedsearch . "%' or uid like '%" . $trimmedsearch . "%'";
 		$data = mysqli_query($dbc, $query);
 		if (!$data) {
     			echo "Error:" .  mysqli_error($dbc);
 		}
-		$_SESSION['data'] = $data;
+		$_SESSION['unextracteddata'] = $data;
 		$returnable = array();
 		while ($row = mysqli_fetch_array($_SESSION['data'])) {
 			$subarray = array();
@@ -34,9 +39,10 @@ require_once("connectvars.php");
 			array_push($subarray, $row['uid']);
 			array_push($returnable, $subarray);
 		}
+		
+		$_SESSION['returnable'] = $returnable;
 
-
-}*/
+}
 
 ?>
 
@@ -58,8 +64,8 @@ require_once("connectvars.php");
 
 <script>
 		var numCategories = "<?php
-				if (isset($_SESSION['category'])){
-					echo mysqli_num_rows($_SESSION['category']);
+				if (isset($_SESSION['returnable'])){
+					echo mysqli_num_rows($_SESSION['unextracteddata']);
 				}
 				else {
 					echo 0;
@@ -81,6 +87,10 @@ require_once("connectvars.php");
 		for(var i = 0; i<numCategories; i++){
 			var a = document.createElement("A");
 			a.innerHTML = category[i];
-			//a.addEventListener("click", function(){})
+			a.onclick =  $('#users').submit();
+			a.href = "#";
+			form.appendChild(a);
 		}
+		document.body.appendChild(form);
+
 </script>
