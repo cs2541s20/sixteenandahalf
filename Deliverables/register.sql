@@ -92,19 +92,20 @@ INSERT INTO student VALUES (88888888, 'yes', 'Criminal Justice', 'Undergraduate'
 INSERT INTO student VALUES (55555555, 'yes', 'Undecided', 'Undergraduate');
 
 
-INSERT INTO enrollment VALUES (11111111, 1222, 'Fall', 'A', 'Junior', false);
-INSERT INTO enrollment VALUES (11111111, 5555, 'Fall', 'B', 'Junior', false);
+INSERT INTO enrollment VALUES (12121212, 1222, 'Fall', 'A', 'Junior', false);
+INSERT INTO enrollment VALUES (44444444, 4444, 'Fall', 'B', 'Junior', false);
 INSERT INTO enrollment VALUES (55555555, 1222, 'Fall', 'C', 'Freshman', false);
-INSERT INTO enrollment VALUES (55555555, 4444, 'Fall', 'B', 'Freshman', false);
+INSERT INTO enrollment VALUES (88888888, 1018, 'Fall', 'B', 'Freshman', false);
 
 
 INSERT INTO course VALUES (1222, 'Monday', '10:30', 'Philips 201', 30);
-INSERT INTO course VALUES (5555, 'Thursday', '10:30', 'Rome 401', 10);
+INSERT INTO course VALUES (1018, 'Thursday', '10:30', 'Rome 401', 10);
 INSERT INTO course VALUES (4444, 'Monday', '11:30', 'Thompkins 201', 30);
 
 
 INSERT INTO coursedata VALUES (1222, 1, 'Humanities', 'Philosophy', 3, 'Fall', 44444444);
-INSERT INTO coursedata VALUES (5555, 2, 'Physics', 'Physics 101', 4, 'Fall', 44444444);
+INSERT INTO coursedata VALUES (1018, 2, 'Computer Science', 'CSCI 6461', 4, 'Fall', 88888888);
+INSERT INTO coursedata VALUES (1018, 2, 'Computer Science', 'CSCI 6212', 4, 'Fall', 88888888);
 INSERT INTO coursedata VALUES (4444, 2, 'Psychology', 'Mind 101', 3, 'Fall', 44444444);
 
 
@@ -120,7 +121,7 @@ INSERT INTO prereqs VALUES (4444, 1222);
 INSERT INTO coreqs VALUES (5555, 1222);
 INSERT INTO coreqs VALUES (4444, 1222);
 
-
+i
 INSERT INTO lab VALUES (5555, 1333);
 INSERT INTO lab VALUES (4444, 1332);
 INSERT INTO lab VALUES (1222, 1331);
