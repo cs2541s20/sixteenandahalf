@@ -59,7 +59,7 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 
 <script>
 	function getUsers(){
-		var numCategories = '<?php
+		var numCategories = "<?php
 				if (isset($_SESSION['returnable'])){
 					echo mysqli_num_rows($_SESSION['unextracteddata']);
 				}
