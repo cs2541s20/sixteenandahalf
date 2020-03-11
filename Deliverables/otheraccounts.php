@@ -42,7 +42,7 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 ?>
 
 
-<body onload = "navbar();">
+<body onload = "navbar(); getUsers();">
 
 
 	<div>
@@ -58,6 +58,7 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 </body>
 
 <script>
+	function getUsers(){
 		var numCategories = "<?php
 				if (isset($_SESSION['returnable'])){
 					echo mysqli_num_rows($_SESSION['unextracteddata']);
@@ -87,5 +88,5 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 			form.appendChild(a);
 		}
 		document.body.appendChild(form);
-
+	}
 </script>
