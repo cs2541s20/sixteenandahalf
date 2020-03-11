@@ -1,9 +1,4 @@
 <?php
-$row['hi'];
-
-?>
-
-<?php
 
 /*testing variables: TODO delete later
  *
@@ -26,14 +21,14 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 			die("Connection failed: " . mysqli_connect_error());
 			echo "connection refused";
 		}
-		$query = "select * from item where name like '%" . $trimmedsearch . "%' or uid like '%" . $trimmedsearch . "%'";
+		$query = "select concat(fname, ' ', lname) as name, uid from item where lname like '%" . $trimmedsearch . "%' or uid like '%" . $trimmedsearch . "%'";
 		$data = mysqli_query($dbc, $query);
 		if (!$data) {
     			echo "Error:" .  mysqli_error($dbc);
 		}
 		$_SESSION['unextracteddata'] = $data;
 		$returnable = array();
-		while ($row = mysqli_fetch_array($_SESSION['data'])) {
+		while ($row = mysqli_fetch_array($_SESSION['unextracteddata'])) {
 			$subarray = array();
 			array_push($subarray, $row['name']);
 			array_push($subarray, $row['uid']);
