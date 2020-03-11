@@ -42,6 +42,13 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 
 }
 
+
+if(isset($_POST['selectedUser'])){
+	$_SESSION['viewas'] = $_POST['selectedUser'];
+	header('Location: index.php');
+}
+
+
 ?>
 
 
@@ -86,6 +93,8 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 		for(var i = 0; i<numCategories; i++){
 			var a = document.createElement("A");
 			a.innerHTML = category[i];
+			a.value = category[i][1];
+			a.name = "selecteduser";
 			a.onclick =  $('#users').submit();
 			a.href = "#";
 			form.appendChild(a);
