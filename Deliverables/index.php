@@ -6,7 +6,9 @@
 $_SESSION['viewtype'] = 'admin';
 $_SESSION['viewas'] = '1234';
 $_SESSION['uid'] = '1234';
-
+if(!isset($_SESSION['viewtype'])){
+	header('Location: login.php');
+}
 require_once("navbar.php");
 ?>
 <html><H2>Welcome to Banweb 2.0 </H2></html>
