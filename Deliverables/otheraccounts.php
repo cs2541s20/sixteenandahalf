@@ -44,9 +44,8 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 
 
 if(isset($_POST['selecteduser'])){
-	$_SESSION['viewas'] = $_POST['selectedUser'];
-	echo "switched to new user";
-	//header('Location: index.php');
+	$_SESSION['viewas'] = $_POST['selecteduser'];
+	header('Location: index.php');
 }
 else{
 	echo "not posted";
@@ -94,15 +93,20 @@ else{
 		form.method = "POST";
 		form.action = "<?php echo $_SERVER['PHP_SELF']; ?>";
 		form.id = "users";
+		var select = document.createElement("SELECT");
+		select.name = "selecteduser";
+		var defaultOption = document.createElement("option");
+		defaultOption.innerHTML = "Select User to View";
+		select.appendChild(defaultOption);
 		for(var i = 0; i<numCategories; i++){
-			var a = document.createElement("A");
-			a.innerHTML = category[i];
-			a.value = category[i][1];
-			a.name = "selecteduser";
-			a.onclick =  function(){console.log(a.value);/*$('#users').submit();*/};
-			a.href = "#";
-			form.appendChild(a);
+			var o = document.createElement("option");
+			o.innerHTML = category[i];
+			o.value = category[i][1];
+		
+			select.appendChild(o);
 		}
+		form.appendChild(select);
+		select.setAttribute("onchange", "$('#users').submit();");
 		document.body.appendChild(form);
 	}
 </script>
