@@ -50,7 +50,7 @@ if(isset($_POST['selecteduser'])){
 	$row = mysqli_fetch_array($data);
 	if(mysqli_num_rows($data) == 1){
 		$_SESSION['viewuid'] = $_POST['selecteduser'];
-		$_SESSION['viewtype'] = $row['type'];
+		$_SESSION['viewtype'] = $row['permission'];
 		//header('Location: index.php');
 		echo "all set! go to index";
 	}
