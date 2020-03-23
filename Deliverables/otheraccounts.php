@@ -51,7 +51,8 @@ if(isset($_POST['selecteduser'])){
 	if(mysqli_num_rows($data) == 1){
 		$_SESSION['viewuid'] = $_POST['selecteduser'];
 		$_SESSION['viewtype'] = $row['type'];
-		header('Location: index.php');
+		//header('Location: index.php');
+		echo "all set! go to index";
 	}
 	else{
 		echo "Unfortunately, we were temporarily unable to connect you through that account. Please try again later.";
