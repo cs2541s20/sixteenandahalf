@@ -78,10 +78,13 @@ CREATE TABLE `lab` (
 
 
 INSERT INTO users VALUES (11111111,  '2121 h st', 'John', 'Doe', 'password', 'john@gwu.edu', 'student');
-INSERT INTO users VALUES (22222222, '1467 f st', 'James', 'Taylor', 'password', 'jt@gwu.edu', 'Admin');
-INSERT INTO users VALUES (33333333, '5433 i st', 'Frank', 'Bolton', 'password', 'pfrank@gwu.edu', 'Admin');
-INSERT INTO users VALUES (44444444, '1212 g st', 'Teacher', 'Man', 'password', 'tman@gwu.edu', 'Teacher');
+INSERT INTO users VALUES (22222222, '1467 f st', 'James', 'Taylor', 'password', 'jt@gwu.edu', 'admin');
+INSERT INTO users VALUES (33333333, '5433 i st', 'Frank', 'Bolton', 'password', 'pfrank@gwu.edu', 'admin');
+INSERT INTO users VALUES (44444444, '1212 g st', 'Teacher', 'Man', 'password', 'tman@gwu.edu', 'faculty');
 INSERT INTO users VALUES (55555555, '2121 h st', 'Cell', 'Freeza', 'password', 'fcell@gwu.edu', 'student');
+INSERT INTO users VALUES (66666666, '4231 j st', 'Brad', 'Mecretary', 'password', 'bmecr@gwu.edu', 'gradsec');
+INSERT INTO users VALUES (77777777, '2121 h st', 'Rad', 'Hecretary', 'password', 'rhecr@gwu.edu', 'gradsec');
+
 
 
 INSERT INTO student VALUES (11111111, 'yes', 'Physics', 'Undergraduate');
