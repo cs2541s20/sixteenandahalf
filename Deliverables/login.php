@@ -29,14 +29,18 @@
 
 
           $row = mysqli_fetch_array($data);
-
+		
           //TODO: so set the user ID and username session vars
          // $_SESSION['user_id'] = $row['user_id'];
-          $_SESSION['user_id'] = $row['user_id'];
-
+	  $_SESSION['uid'] = $row['uid'];
+	  $_SESSION['viewas'] = $row['uid'];
+	  $_SESSION['viewtype'] = $row['permission'];
+	  echo "success! logged in as:";
+	  echo $row['permission'];
+	  echo $row['uid'];
           //TODO: redirect to index.php
           $home_url = 'index.php';
-          header('Location: ' . $home_url);
+          //header('Location: ' . $home_url);
         }
         else {
           // The username/password are incorrect so set an error message
