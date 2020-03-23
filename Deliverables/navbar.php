@@ -3,61 +3,85 @@
 	//$filename = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1); 
 	
 	
-	/*let 'viewtype' refer to a permission level as either:
+	/*
+	  let 'type' refer to a permission level of the actual user as either:
+	  	'admin'
+		'gradsec'
+		'faculty'
+		'student'
+
+	  let 'viewtype' refer to a permission level of the simulated user as either:
 		'admin'
 		'gradsec'
 		'faculty'
 		'student'
 		
-	  let 'viewas' refer to the uid of the user we are simulating
+	  let 'viewuid' refer to the uid of the user we are simulating
 	  
 	  let 'uid' refer to the uid of the logged in user
 	  
-	  if the viewas and uid session variables are equal, then a supervising user is on their account.
+	  if the viewuid and uid session variables are equal, then a supervising user is on their account.
 	  Otherwise, the user is viewing a different person's account and we need to create a "Back to my account"
 	  link to allow the user to go back to their actual account.
 	
 	*/
 
-	if(isset($_SESSION['viewtype'])){
-		echo "logged in test success!";
-	}
-	else{
-		echo "logged in test failure..";
+
+	if(isset($_SESSION['type']) && $_SESSION['type'] == 'admin'){
+		if($_SESSION['viewuid'] == $_SESSION['uid']){
+			debuginfo();
+			setsysadmin(false);
+		}
+		else{
+			if($_SESSION['viewtype'] ==  'admin'){
+				debuginfo();
+				setsysadmin(true);
+			}
+			if($_SESSION['viewtype'] == 'gradsec'){
+				debuginfo();
+				setgradsec(true);
+			}
+			if($_SESSION['viewtype'] ==  'faculty'){
+				debuginfo();
+				setfaculty(true);
+			}
+			if($_SESSION['viewtype'] == 'student'){
+				debuginfo();
+				setstudent(true);
+			}		
+		}
 	}
 
-	if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'admin' && $_SESSION['viewas'] != $_SESSION['uid']){
-		echo "sysadmin true";
-		setsysadmin(true);
+	else if(isset($_SESSION['type']) && $_SESSION['type'] == 'gradsec'){
+		if($_SESSION['viewuid'] == $_SESSION['uid']){
+			debuginfo();
+			setsysadmin(false);
+		}
+		else{
+			if($_SESSION['viewtype'] == 'gradsec'){
+				debuginfo();
+				setgradsec(true);
+			}
+			if($_SESSION['viewtype'] ==  'faculty'){
+				debuginfo();
+				setfaculty(true);
+			}
+			if($_SESSION['viewtype'] == 'student'){
+				debuginfo();
+				setstudent(true);
+			}		
+		}
 	}
-	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'admin' && $_SESSION['viewas'] == $_SESSION['uid']){
-		echo "sysadmin false";
-		setsysadmin(false);
-	}
-	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'gradsec' && $_SESSION['viewas'] != $_SESSION['uid']){
-		echo "gradsec true";
-		setgradsec(true);
-	}
-	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'gradsec' && $_SESSION['viewas'] == $_SESSION['uid']){
-		echo "gradsec false";
-		setgradsec(false);
-	}
-	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'faculty' && $_SESSION['viewas'] != $_SESSION['uid']){
-		echo "faculty true";
-		setfaculty(true);
-	}
-	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'faculty' && $_SESSION['viewas'] == $_SESSION['uid']){
-		echo "faculty false";
+
+	else if(isset($_SESSION['type']) && $_SESSION['type'] == 'faculty' && $_SESSION['viewuid'] != $_SESSION['uid']){
+		debuginfo();
 		setfaculty(false);
 	}
-	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'student' && $_SESSION['viewas'] != $_SESSION['uid']){
-		echo "student false";
-		setstudent(true);
-	}
-	else if(isset($_SESSION['viewtype']) && $_SESSION['viewtype'] == 'student' && $_SESSION['viewas'] == $_SESSION['uid']){
-		echo "student true";
-		setstudent(true);
-	}
+	
+	else if(isset($_SESSION['type']) && $_SESSION['type'] == 'student'){
+		debuginfo();
+		setstudent(false);
+	}	
 	
 	else{
 		echo "no pages";
@@ -77,13 +101,14 @@
 		$navbar[5] = "logout.php";
 		$navbar[6] = "Create Accounts";
 		$navbar[7] = "createaccount.php";
-		$navbar[8] = "Other Accounts";
-		$navbar[9] = "otheraccounts.php";
 		if($needsHome == true){
-			$navbar[10] = "Back to my Account";
-			$navbar[11] = "home.php";
+			$navbar[8] = "Back to my Account";
+			$navbar[9] = "home.php";
 		}
-
+		else{
+			$navbar[8] = "Other Accounts";
+			$navbar[9] = "otheraccounts.php";
+		}
 		$_SESSION['navbar'] = $navbar;
 	}
 
@@ -102,8 +127,10 @@
 			$navbar[8] = "Back to my Account";
 			$navbar[9] = "home.php";
 		}
-
-		$_SESSION['navbar'] = $navbar;
+		else{
+			$navbar[8] = "Other Accounts";
+			$navbar[9] = "otheraccounts.php";
+		}		$_SESSION['navbar'] = $navbar;
 	}
 	
 	function setfaculty($needsHome){
