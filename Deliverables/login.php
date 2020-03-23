@@ -31,8 +31,9 @@
           $row = mysqli_fetch_array($data);
 		
 	  $_SESSION['uid'] = $row['uid'];
-	  $_SESSION['viewas'] = $row['uid'];
+	  $_SESSION['viewuid'] = $row['uid'];
 	  $_SESSION['viewtype'] = $row['permission'];
+	  $_SESSION['type'] = $row['permission'];
 
           $home_url = 'index.php';
           header('Location: ' . $home_url);
