@@ -169,7 +169,12 @@
 		$_SESSION['navbar'] = $navbar;
 	}
 
-	
+	function debuginfo(){
+		echo "logged in userid: " . $_SESSION['uid'];
+		echo "logged in user permission level: " . $_SESSION['type'];
+		echo "viewing as user: " . $_SESSION['viewuid'];
+		echo "view with permission level: " . $_SESSION['viewtype'];
+	}	
 ?>
 
 <script>
