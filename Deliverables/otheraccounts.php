@@ -3,13 +3,9 @@
 
 <?php
 
-/*testing variables: TODO delete later
- *
- */
+
 session_start();
-$_SESSION['viewtype'] = 'admin';
-$_SESSION['viewas'] = '1234';
-$_SESSION['uid'] = '1234';
+
 
 require_once("navbar.php");
 require_once("connectvars.php");
