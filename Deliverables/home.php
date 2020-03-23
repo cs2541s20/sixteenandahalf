@@ -1,8 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['viewtype'])){
-	echo "would be sending to login";
-	//header('Location: login.php');
+	header('Location: login.php');
 }
 
 else{

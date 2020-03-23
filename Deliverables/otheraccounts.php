@@ -52,8 +52,7 @@ if(isset($_POST['selecteduser'])){
 		$_SESSION['viewuid'] = $_POST['selecteduser'];
 		$_SESSION['viewtype'] = $row['permission'];
 		$_SESSION['viewname'] = $row['name'];
-		//header('Location: index.php');
-		echo "all set! go to index";
+		header('Location: index.php');
 	}
 	else{
 		echo "Unfortunately, we were temporarily unable to connect you through that account. Please try again later.";

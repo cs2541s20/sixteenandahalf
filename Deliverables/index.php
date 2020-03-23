@@ -2,8 +2,7 @@
 
 session_start();
 if(!isset($_SESSION['viewtype'])){
-	//header('Location: login.php');
-	echo "would be sending back to login";
+	header('Location: login.php');
 }
 require_once("navbar.php");
 ?>
