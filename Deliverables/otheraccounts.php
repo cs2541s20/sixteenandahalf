@@ -40,12 +40,24 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 
 
 if(isset($_POST['selecteduser'])){
-	$_SESSION['viewas'] = $_POST['selecteduser'];
-	header('Location: index.php');
+
+	$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	$query = "select permission from users where uid = " . $_POST['selecteduser'];
+	$data = mysqli_query($dbc, $query);
+	if (!$data) {
+		echo "Error:" .  mysqli_error($dbc);
+	}
+	$row = mysqli_fetch_array($data);
+	if(mysqli_num_rows($data) == 1){
+		$_SESSION['viewuid'] = $_POST['selecteduser'];
+		$_SESSION['viewtype'] = $row['type'];
+		header('Location: index.php');
+	}
+	else{
+		echo "Unfortunately, we were temporarily unable to connect you through that account. Please try again later.";
+	}
 }
-else{
-	echo "not posted";
-}
+
 
 
 ?>
