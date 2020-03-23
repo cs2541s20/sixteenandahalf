@@ -1,9 +1,5 @@
 <?php
 
-/*testing variables: TODO delete later
- *
- */
-
 session_start();
 if(!isset($_SESSION['viewtype'])){
 	header('Location: login.php');
