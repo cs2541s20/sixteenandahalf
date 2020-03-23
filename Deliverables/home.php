@@ -7,5 +7,6 @@ if(!isset($_SESSION['viewtype'])){
 else{
 	$_SESSION['viewuid'] = $_SESSION['uid'];
 	$_SESSION['viewtype'] = $_SESSION['type'];
+	unset($_SESSION['viewname']);
 	header('Location: index.php');
 }
