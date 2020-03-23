@@ -42,7 +42,7 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 if(isset($_POST['selecteduser'])){
 
 	$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-	$query = "select permission from users where uid = " . $_POST['selecteduser'];
+	$query = "select permission, concat(fname, ' ', lname) as name from users where uid = " . $_POST['selecteduser'];
 	$data = mysqli_query($dbc, $query);
 	if (!$data) {
 		echo "Error:" .  mysqli_error($dbc);
@@ -51,6 +51,7 @@ if(isset($_POST['selecteduser'])){
 	if(mysqli_num_rows($data) == 1){
 		$_SESSION['viewuid'] = $_POST['selecteduser'];
 		$_SESSION['viewtype'] = $row['permission'];
+		$_SESSION['viewname'] = $row['name'];
 		//header('Location: index.php');
 		echo "all set! go to index";
 	}
