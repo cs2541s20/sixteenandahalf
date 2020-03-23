@@ -181,7 +181,7 @@
 function navbar(){
 		//navbar
 		var loggedin = "<?php 
-					if (isset($_SESSION['username'])){
+					if (isset($_SESSION['name'])){
 						echo true;
 					} 
 					else {
@@ -192,6 +192,20 @@ function navbar(){
 		}
 		else{
 			loggedin = true;
+		}
+
+		var viewing = "<?php
+					if (isset($_SESSION['viewname'])){
+						echo true;
+					}
+					else{
+						echo false;
+					}?>";
+		if(viewing == ""){
+			viewing = false;
+		}
+		else{
+			viewing = true;
 		}
 		console.log("The value is: \"" + loggedin + "\"");
 		var navdiv = document.createElement("DIV");
@@ -216,20 +230,29 @@ function navbar(){
 				navtr.appendChild(navtd);
 			}
 		}
-		/*if(loggedin){
+		if(loggedin){
 			navtd = document.createElement("TD");
 			var welcomelabel = document.createElement("P");
 			welcomelabel.className = "welcome";
 			welcomelabel.innerText = "Welcome " + "<?php 
-					if (isset($_SESSION['username'])){
-						echo $_SESSION['username'];
+					if (isset($_SESSION['name'])){
+						echo $_SESSION['name'];
 					} 
 					else {
 						echo "";
 					}?>" + "!";
 			navtd.appendChild(welcomelabel);
 			navtr.appendChild(navtd);
-		}*/
+			if(viewing){
+				welcomelabel.innerText+= " (Viewing as: " + "<?php
+					if (isset($_SESSION['viewname'])){
+						echo $_SESSION['viewname'];
+					}
+					else{
+						echo "";
+					}?>" + " )";
+			}
+		}
 		navtable.appendChild(navtr);
 		navdiv.appendChild(navtable);
 		document.body.insertBefore(navdiv, document.body.firstChild);

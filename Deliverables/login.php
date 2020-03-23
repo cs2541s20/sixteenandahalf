@@ -34,7 +34,7 @@
 	  $_SESSION['viewuid'] = $row['uid'];
 	  $_SESSION['viewtype'] = $row['permission'];
 	  $_SESSION['type'] = $row['permission'];
-
+	  $_SESSION['name'] = $row['fname'] . $row['lname'];
           $home_url = 'index.php';
           header('Location: ' . $home_url);
         }
