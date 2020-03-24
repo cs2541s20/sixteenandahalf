@@ -1,13 +1,16 @@
 
 <?php
 
-/*testing variables: TODO delete later
- *
- */
+if(!isset($_SESSION['uid'])){
+	header('Location: login.php');
+}
+else if($_SESSION['viewtype'] != "student" && $_SESSION['viewtype'] != 'faculty'){
+	header('Location: index.php');
+}
 require_once('connectvars.php');
 require_once('login.php');
-$_SESSION['viewtype'] = 'admin';
-$_SESSION['viewas'] = '1234';
+
+
 $user_id = $_SESSION['uid'];
 
 
