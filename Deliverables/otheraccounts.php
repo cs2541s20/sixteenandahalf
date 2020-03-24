@@ -25,7 +25,7 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 			die("Connection failed: " . mysqli_connect_error());
 			echo "connection refused";
 		}
-		if($_SESSION['viewtype'] != 'gradsec'){
+		if($_SESSION['viewtype'] == 'gradsec'){
 			$query = "select concat(fname, ' ', lname) as name, uid from users where (lname like '%" . $trimmedsearch . "%' or uid like '%" . $trimmedsearch . "%') and permission != 'admin'";
 		}
 		else{
