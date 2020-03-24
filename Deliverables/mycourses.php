@@ -9,13 +9,15 @@ else if($_SESSION['viewtype'] != 'faculty'){
 }
 
 require_once("navbar.php");
-
+$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+$query = "SELECT * FROM enrollment join course on enrollment.crn = course.crn where uid = $user_id";
+$data = mysqli_query($dbc, $query);
 ?>
 
 <body onload="navbar();">
-
+<H4>My Courses</H4>
 <html>
-<table style="width:100%">
+<table style="width:50%">
   <tr>
     <th>CRN</th>
     <th>Class</th>
@@ -25,20 +27,22 @@ require_once("navbar.php");
     <th>Section<th>
   </tr>
   <tr>
-    <td>444444</td>
-    <td>Computer Architecture</td>
-    <td>MW</td>
-    <td>12:30<td>
-    <td>3<td>
-    
-  </tr>
+   
+ </tr>
+      <?php while( $row = mysqli_fetch_array($data)) { ?>
   <tr>
-    <td>555555</td>
-    <td>Software</td>
-    <td>TR</td>
-    <td>1:30<td>
-    <td>1<td>
+    <th><?php echo ''. $row['crn'] ?></th>
+    <th><?php echo ''. $row['name']; ?></th>
+    <th><?php echo ''. $row['day']?></th>
+    <th><?php echo ''. $row['time']?></th>
+    <th><?php echo ''. $row['location']?></th>
+    <th><?php echo ''. $row['section']?></th>
   </tr>
+<?php } ?>
+
+
+
+
 </table>
 </html>
 
