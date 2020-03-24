@@ -1,13 +1,7 @@
-//start the index page
 <?php
-
-/*testing variables: TODO delete later
- *
- */
-$_SESSION['viewtype'] = 'admin';
-$_SESSION['viewas'] = '1234';
-$_SESSION['uid'] = '1234';
-
+if(!isset($_SESSION['uid'])){
+	header('Location: login.php');
+}
 require_once("navbar.php");
 
 ?>
