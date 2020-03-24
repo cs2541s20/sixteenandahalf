@@ -8,7 +8,6 @@ else if($_SESSION['viewtype'] != "student" && $_SESSION['viewtype'] != 'faculty'
 	header('Location: index.php');
 }
 require_once('connectvars.php');
-require_once('login.php');
 
 
 $user_id = $_SESSION['uid'];
