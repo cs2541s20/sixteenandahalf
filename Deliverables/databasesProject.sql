@@ -29,7 +29,7 @@ CREATE TABLE `enrollment` (
   `uid` int(8),
   `crn` int,
   `semester` varchar(8),
-  `year` varchar(4),
+  `year` varchar(8),
   `grade` varchar(12),
   `gradeModified` boolean,
   PRIMARY KEY (`uid`, `crn`)
@@ -91,10 +91,10 @@ INSERT INTO student VALUES (11111111, 'yes', 'Physics', 'Undergraduate');
 INSERT INTO student VALUES (55555555, 'yes', 'Psychology', 'Undergraduate');
 
 
-INSERT INTO enrollment VALUES (11111111, 1222, 'Fall', 'A', 'Junior', false);
-INSERT INTO enrollment VALUES (11111111, 5555, 'Fall', 'B', 'Junior', false);
-INSERT INTO enrollment VALUES (55555555, 1222, 'Fall', 'C', 'Freshman', false);
-INSERT INTO enrollment VALUES (55555555, 4444, 'Fall', 'B', 'Freshman', false);
+INSERT INTO enrollment VALUES (11111111, 1222, 'Fall', 'Junior', 'A', false);
+INSERT INTO enrollment VALUES (11111111, 5555, 'Fall', 'Junior', 'B', false);
+INSERT INTO enrollment VALUES (55555555, 1222, 'Fall', 'Freshman', 'C', false);
+INSERT INTO enrollment VALUES (55555555, 4444, 'Fall', 'Freshman', 'B', false);
 
 
 INSERT INTO course VALUES (1222, 'Monday', '10:30', 'Philips 201', 30);
