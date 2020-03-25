@@ -167,7 +167,7 @@
 			$navbar[10] = "Back to my Account";
 			$navbar[11] = "home.php";
 		}
-
+		echo $navbar;
 		$_SESSION['navbar'] = $navbar;
 	}
 

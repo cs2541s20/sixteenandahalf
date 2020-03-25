@@ -15,7 +15,8 @@ $user_id = $_SESSION['uid'];
 
 require_once("navbar.php");
 ?>
-<html><h3>Course Registration</h3></html>
+<html><h3>Course Registration</h3>
+<body onload='navbar();'>
 <?php
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME); 
 
@@ -55,7 +56,7 @@ if(isset($_POST['Register'])){
 
 
 ?>
-<html>
+
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <fieldset>
       <legend>Course Register</legend>
@@ -64,4 +65,6 @@ if(isset($_POST['Register'])){
     </fieldset>
     <input type="submit" value="submit" name="Register" />
   </form>
+
+  </body>
   </html>
