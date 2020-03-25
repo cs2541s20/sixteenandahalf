@@ -21,6 +21,43 @@ $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 ?>
 
+<?php
+$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+if(isset($_POST['Change Grade'])){
+    $user_crn = mysqli_real_escape_string($dbc, trim($_POST['CRN']));
+    $query = "SELECT * from courses where crn ='$user_crn'";
+    $data = mysqli_query($dbc, $query);
+    if($row = mysqli_fetch_array($data) == true){
+      $sql = "INSERT INTO enrollment VALUES ('$user_id', '$user_crn', 'Fall', 'Sophomore', 'IP', false)";
+      if($dbc->query($sql) === TRUE){
+        $query = "SELECT * from prereqs where crn ='$user_crn'";
+        $data = mysqli_query($dbc, $query);
+        if($row = mysqli_fetch_array($data) == true){
+          $query = "SELECT * from enrollment join prereqs on enrollment.crn = prereqs.crn where enrollment.crn = '$user_crn' and uid = '$user_id'";
+          $data = mysqli_query($dbc, $query);
+          if($row = mysqli_fetch_array($data) == true){
+            echo  'Course Added' ;
+          }
+        }
+	  
+      }
+      else{
+        echo 'Failed To Change Grades';
+      }
+      if(!$user_crn){
+        echo 'No Results';
+      }
+    }
+    else{
+      echo 'Failed to Change Grades';
+    }
+  }
+
+
+
+?>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -35,21 +72,17 @@ $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
   <p>Change Grade:</p>
   <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-    <label for="firstname">First name:</label>
-    <input type="text" name="firstname" /><br />
+    <label for="Student ID">Student ID:</label>
+    <input type="text" name="Student ID" /><br />
    
 
-    <label for="lastname">Last name:</label>
-    <input type="text" name="lastname" /><br />
-    <label for="email">What is your email address?</label>
-    <input type="text" name="email" /><br />
+    <label for="CRN">CRN:</label>
+    <input type="text" name="CRN" /><br />
     
     
-    <label for="type of user">What type of user?</label>
-    <input type="text" name="type of user" /><br />
 
-    <label for="userrID">Enter userID:</label>
-    <input type="text" name="userID" size="32" /><br />
+    <label for="userrID">New Grade:</label>
+    <input type="text" name="New Grade" size="32" /><br />
 
 
     
