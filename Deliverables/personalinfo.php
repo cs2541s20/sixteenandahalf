@@ -19,7 +19,6 @@ if(!$dbc){
 	echo "connection refused";
 }
 $query = "SELECT * FROM student join users on student.uid = users.uid where student.uid = " . $user_id;
-echo $query;
 $data = mysqli_query($dbc, $query);
 if(!$data){
 	echo "Error: " . mysqli_error($dbc);
