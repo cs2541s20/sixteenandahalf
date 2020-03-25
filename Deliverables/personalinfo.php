@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['uid'])){
-	header('Location: login.php');
+  header('Location: login.php');
 }
 
 require_once('connectvars.php');
@@ -12,6 +12,21 @@ require_once("navbar.php");
 
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 if(!$dbc){
+
+  die("Connection failed ". mysqli_connect_error());
+  echo "connection refused";
+}
+if($_SESSION['type'] == "student"){
+  $isstudent = true;
+  $query = "SELECT * FROM student join users on student.uid = users.uid where student.uid = " . $user_id;
+}
+else{
+  $isstudent = false;
+  $query = "select * from users where users.uid = " . $user_id;
+}
+$data = mysqli_query($dbc, $query);
+if(!$data){
+  echo "Error: " . mysqli_error($dbc);
 	die("Connection failed ". mysqli_connect_error());
 	echo "connection refused";
 }
@@ -60,11 +75,3 @@ if(!$data){
 
 </table>
 </html>
-
-
-
-
-
-
-
-
