@@ -14,7 +14,7 @@ $user_id = $_SESSION['uid'];
 require_once("navbar.php");
 
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-$query = "SELECT * FROM student join users on student.uid = users.uid  where uid = $user_id";
+$query = "SELECT * FROM student join users on student.uid = users.uid  where student.uid = $user_id";
 $data = mysqli_query($dbc, $query);
 
 ?>
