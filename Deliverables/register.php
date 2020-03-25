@@ -9,7 +9,7 @@ else if($_SESSION['viewtype'] != "student" /*&& $_SESSION['viewtype'] != 'facult
 require_once('connectvars.php');
 
 
-$user_id = $_SESSION['uid'];
+$user_id = $_SESSION['viewuid'];
 
 
 
@@ -40,6 +40,9 @@ if(isset($_POST['Register'])){
             echo 'Prerqs Needed' ;
           }
         }
+        else{
+          echo 'Course Added';
+        }
       }
       else{
         echo 'Failed To Add Course';
@@ -52,6 +55,15 @@ if(isset($_POST['Register'])){
       echo 'Failed to Add Course';
     }
   }
+if(isset($_POST['Drop'])){
+  $user_drop = mysqli_real_escape_string($dbc, trim($_POST['drop'])); 
+  $sql = "DELETE FROM enrollment WHERE crn = '$user_crn' = and uid = '$user_id'";
+  //$data = mysqli_query($dbc, $query);
+  if($dbc->query($sql) === TRUE){
+    echo "Course Removed";
+  }
+
+
 
 
 
@@ -64,6 +76,15 @@ if(isset($_POST['Register'])){
       <input type="text" name="CRN" />
     </fieldset>
     <input type="submit" value="submit" name="Register" />
+  </form>
+
+  <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    <fieldset>
+      <legend>Drop Class</legend>
+      <label for="drop">drop:</label>
+      <input type="text" name="drop" />
+    </fieldset>
+    <input type="submit" value="submit" name="Drop" />
   </form>
 
   </body>

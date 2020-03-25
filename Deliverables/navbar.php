@@ -144,9 +144,11 @@
 		$navbar[5] = "logout.php";
 		$navbar[6] = "My Courses";
 		$navbar[7] = "mycourses.php";
+		$navbar[8] = "Modify Grades";
+		$navbar[9] = "changegrades.php";
 		if($needsHome == true){
-			$navbar[8] = "Back to my Account";
-			$navbar[9] = "home.php";
+			$navbar[10] = "Back to my Account";
+			$navbar[11] = "home.php";
 		}
 
 		$_SESSION['navbar'] = $navbar;

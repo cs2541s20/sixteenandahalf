@@ -4,7 +4,7 @@ session_start();
 if(!isset($_SESSION['uid'])){
 	header('Location: login.php');
 }
-else if($_SESSION['type'] != 'faculty'){
+else if($_SESSION['viewtype'] != 'faculty'){
 	header('Location: index.php');
 }
 
