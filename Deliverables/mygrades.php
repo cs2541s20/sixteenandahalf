@@ -1,16 +1,28 @@
 
 <?php
+session_start();
+if(!isset($_SESSION['uid'])){
+	header('Location: login.php');
+}
+else if($_SESSION['viewtype'] != "student" && $_SESSION['viewtype'] != 'faculty'){
+	header('Location: index.php');
+}
+require_once('connectvars.php');
 
-/*testing variables: TODO delete later
- *
- */
-$_SESSION['viewtype'] = 'admin';
-$_SESSION['viewas'] = '1234';
-$_SESSION['uid'] = '1234';
+
+$user_id = $_SESSION['uid'];
+
+
 
 require_once("navbar.php");
+$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME); 
+$query = "SELECT * FROM enrollment join coursedata on enrollment.crn = coursedata.crn where uid = $user_id";
+$data = mysqli_query($dbc, $query);
 ?>
 <html>
+<body onload="navbar();">
+
+</body>
 <H4>My Grades</H4>
 <table style="width:50%">
   <tr>
@@ -18,31 +30,14 @@ require_once("navbar.php");
     <th>Class</th>
     <th>Grade</th>
   </tr>
+      <?php while( $row = mysqli_fetch_array($data)) { ?>
+
   <tr>
-    <td>345789</td>
-    <td>Chemistry</td>
-    <td>50</td>
+    <th><?php echo ''. $row['crn'] ?></th>
+    <th><?php echo ''. $row['name']; ?></th>
+    <th><?php echo ''. $row['grade']?></th>
   </tr>
-  <tr>
-    <td>237891</td>
-    <td>Biology</td>
-    <td>76</td>
-  </tr>
-    <tr>
-    <td>452111</td>
-    <td>University Writingn</td>
-    <td>94</td>
-  </tr>
-      <tr>
-    <td>278692</td>
-    <td>Calculus</td>
-    <td>82</td>
-  </tr>
+<?php } ?>
 
 </table>
 </html>
-
-
-<body onload="navbar();">
-
-</body>

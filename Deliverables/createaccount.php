@@ -1,12 +1,12 @@
-//start the index page
 <?php
-
-/*testing variables: TODO delete later
- *
- */
-$_SESSION['viewtype'] = 'admin';
-$_SESSION['viewas'] = '1234';
-$_SESSION['uid'] = '1234';
+session_start();
+if(!isset($_SESSION['uid'])){
+	header('Location: login.php');
+}
+else if($_SESSION['type']!= 'admin'){
+	header('Location: index.php');
+}
+	
 
 require_once("navbar.php");
 
@@ -41,8 +41,6 @@ require_once("navbar.php");
     <label for="password">Enter password?</label>
     <input type="text" name="password" size="32" /><br />
 
-    <label for="other">Anything else you want to add?</label>
-    <textarea name="other"></textarea><br />
     <input type="submit" value="Create Account" name="Create Account" /><br/><br/>
   </form>
 </body>

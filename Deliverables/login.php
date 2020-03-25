@@ -29,12 +29,12 @@
 
 
           $row = mysqli_fetch_array($data);
-
-          //TODO: so set the user ID and username session vars
-         // $_SESSION['user_id'] = $row['user_id'];
-          $_SESSION['user_id'] = $row['user_id'];
-
-          //TODO: redirect to index.php
+		
+	  $_SESSION['uid'] = $row['uid'];
+	  $_SESSION['viewuid'] = $row['uid'];
+	  $_SESSION['viewtype'] = $row['permission'];
+	  $_SESSION['type'] = $row['permission'];
+	  $_SESSION['name'] = $row['fname'] . " " . $row['lname'];
           $home_url = 'index.php';
           header('Location: ' . $home_url);
         }

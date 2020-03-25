@@ -1,18 +1,22 @@
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <?php
 
-/*testing variables: TODO delete later
- *
- */
+
 session_start();
-$_SESSION['viewtype'] = 'admin';
-$_SESSION['viewas'] = '1234';
-$_SESSION['uid'] = '1234';
+if(!isset($_SESSION['uid'])){
+	header('Location: login.php');
+}
+if($_SESSION['viewtype'] != 'gradsec' && $_SESSION['viewtype'] != 'admin'){
+	header('Location: index.php');
+}
 
 require_once("navbar.php");
 require_once("connectvars.php");
 
 
-/*if(isset($_POST['search']) && !empty($_POST['search'])){
+if(isset($_POST['search']) && !empty($_POST['search'])){
 		$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 		$trimmedsearch = mysqli_real_escape_string($dbc, trim($_POST['search']));
 		$_SESSION['search'] = $trimmedsearch;
@@ -21,27 +25,56 @@ require_once("connectvars.php");
 			die("Connection failed: " . mysqli_connect_error());
 			echo "connection refused";
 		}
-		$query = "select * from item where name like '%" . $trimmedsearch . "%'" or uid like '%" . $trimmedsearch . "%'";
+		if($_SESSION['viewtype'] == 'gradsec'){
+			$query = "select concat(fname, ' ', lname) as name, uid from users where (lname like '%" . $trimmedsearch . "%' or uid like '%" . $trimmedsearch . "%') and permission != 'admin'";
+		}
+		else{
+			$query = "select concat(fname, ' ', lname) as name, uid from users where lname like '%" . $trimmedsearch . "%' or uid like '%" . $trimmedsearch . "%'";
+		}
 		$data = mysqli_query($dbc, $query);
 		if (!$data) {
     			echo "Error:" .  mysqli_error($dbc);
 		}
-		$_SESSION['data'] = $data;
+		$_SESSION['unextracteddata'] = $data;
 		$returnable = array();
-		while ($row = mysqli_fetch_array($_SESSION['data'])) {
+		while ($row = mysqli_fetch_array($_SESSION['unextracteddata'])) {
 			$subarray = array();
 			array_push($subarray, $row['name']);
 			array_push($subarray, $row['uid']);
 			array_push($returnable, $subarray);
 		}
+		
+		$_SESSION['returnable'] = $returnable;
+
+}
 
 
-}*/
+if(isset($_POST['selecteduser'])){
+
+	$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	$query = "select permission, concat(fname, ' ', lname) as name from users where uid = " . $_POST['selecteduser'];
+	$data = mysqli_query($dbc, $query);
+	if (!$data) {
+		echo "Error:" .  mysqli_error($dbc);
+	}
+	$row = mysqli_fetch_array($data);
+	if(mysqli_num_rows($data) == 1){
+		$_SESSION['viewuid'] = $_POST['selecteduser'];
+		$_SESSION['viewtype'] = $row['permission'];
+		$_SESSION['viewname'] = $row['name'];
+		header('Location: index.php');
+	}
+	else{
+		echo "Unfortunately, we were temporarily unable to connect you through that account. Please try again later.";
+	}
+}
+
+
 
 ?>
 
 
-<body onload = "navbar();">
+<body onload = "navbar(); getUsers();">
 
 
 	<div>
@@ -57,17 +90,18 @@ require_once("connectvars.php");
 </body>
 
 <script>
+	function getUsers(){
 		var numCategories = "<?php
-				if (isset($_SESSION['category'])){
-					echo mysqli_num_rows($_SESSION['category']);
+				if (isset($_SESSION['returnable'])){
+					echo mysqli_num_rows($_SESSION['unextracteddata']);
 				}
 				else {
 					echo 0;
 				}?>";
 		numCategories = parseInt(numCategories);
 		var category = <?php
-				if(!empty($category)){
-					echo json_encode($category);
+				if(!empty($returnable)){
+					echo json_encode($returnable);
 					}
 					else{
 						echo "";
@@ -78,9 +112,20 @@ require_once("connectvars.php");
 		form.method = "POST";
 		form.action = "<?php echo $_SERVER['PHP_SELF']; ?>";
 		form.id = "users";
+		var select = document.createElement("SELECT");
+		select.name = "selecteduser";
+		var defaultOption = document.createElement("option");
+		defaultOption.innerHTML = "Select User to View";
+		select.appendChild(defaultOption);
 		for(var i = 0; i<numCategories; i++){
-			var a = document.createElement("A");
-			a.innerHTML = category[i];
-			//a.addEventListener("click", function(){})
+			var o = document.createElement("option");
+			o.innerHTML = category[i];
+			o.value = category[i][1];
+		
+			select.appendChild(o);
 		}
+		form.appendChild(select);
+		select.setAttribute("onchange", "$('#users').submit();");
+		document.body.appendChild(form);
+	}
 </script>
