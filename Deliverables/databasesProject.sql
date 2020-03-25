@@ -29,7 +29,7 @@ CREATE TABLE `enrollment` (
   `uid` int(8),
   `crn` int,
   `semester` varchar(8),
-  `year` varchar(8),
+  `year` varchar(9),
   `grade` varchar(12),
   `gradeModified` boolean,
   PRIMARY KEY (`uid`, `crn`)
@@ -83,7 +83,7 @@ INSERT INTO users VALUES (33333333, '5433 i st', 'Frank', 'Bolton', 'password', 
 INSERT INTO users VALUES (44444444, '1212 g st', 'Teacher', 'Man', 'password', 'tman@gwu.edu', 'faculty');
 INSERT INTO users VALUES (55555555, '2121 h st', 'Cell', 'Freeza', 'password', 'fcell@gwu.edu', 'student');
 INSERT INTO users VALUES (66666666, '4231 j st', 'Brad', 'Mecretary', 'password', 'bmecr@gwu.edu', 'gradsec');
-INSERT INTO users VALUES (77777777, '2121 h st', 'Rad', 'Hecretary', 'password', 'rhecr@gwu.edu', 'gradsec');
+INSERT INTO users VALUES (77777777, '2121 h st', 'Rad', 'Hecretary', 'password', 'rhecr@gwu.edu', 'gradsec'); 
 
 
 

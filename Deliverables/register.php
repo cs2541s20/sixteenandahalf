@@ -21,9 +21,9 @@ if(isset($_POST['submit'])){
     $query = "SELECT * from course where crn ='$user_crn'";
     $data = mysqli_query($dbc, $query);
     if($row = mysqli_fetch_array($data) == true){
-      $sql = "INSERT INTO enrollemnt VALUES ('$user_id', '$user_crn', 'Fall', 'Sophomore', NULL, false)";
+      $sql = "INSERT INTO enrollment VALUES ('$user_id', '$user_crn', 'Fall', 'Sophomore', NULL, false)";
       if($dbc->query($sql) === TRUE){
-        echo $name . " Course Added" ;
+        echo  'Course Added' ;
       }
       if(!$user_crn){
         echo 'No Results';
