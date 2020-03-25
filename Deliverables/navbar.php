@@ -215,13 +215,7 @@ function navbar(){
 		var navtable = document.createElement("TABLE");
 		var navtr = document.createElement("TR");
 		var navname = <?php echo json_encode($_SESSION['navbar']); ?>;
-		if(Array.isArray(navname)){
-			var length = navname.length;
-		}
-		else{
-			var length = Object.keys(navname).length;
-		}
-		for(var i = 0; i<length; i+=2){
+		for(var i = 0; i<navname.length; i+=2){
 			if(window.location.href.includes(navname[i+1])){
 				continue;
 			}
