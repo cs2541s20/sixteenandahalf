@@ -39,7 +39,7 @@ if(!$data){
     <th>Last Name </th>
     <th>Email Address</th>
     <th>Permission</th>
-    <?phpif($isstudent == true){
+    <?php if($isstudent == true){
       echo "<th>Degree</th>";
       echo "<th>Program</th>";
      }?>
