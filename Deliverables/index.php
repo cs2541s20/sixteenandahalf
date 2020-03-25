@@ -12,8 +12,6 @@ if(isset($_POST['reset'])){
 	$this->$dbc->multi_query($commands);
 }	
 
-
-}
 require_once("navbar.php");
 ?>
 <html><H2>Welcome to Banweb 2.0 </H2></html>
