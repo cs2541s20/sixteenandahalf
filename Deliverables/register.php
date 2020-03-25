@@ -24,7 +24,7 @@ if(isset($_POST['Register'])){
     $query = "SELECT * from course where crn ='$user_crn'";
     $data = mysqli_query($dbc, $query);
     if($row = mysqli_fetch_array($data) == true){
-      $sql = "INSERT INTO enrollment VALUES ('$user_id', '$user_crn', 'Fall', 'Sophomore', IP, false)";
+      $sql = "INSERT INTO enrollment VALUES ('$user_id', '$user_crn', 'Fall', 'Sophomore', 'IP', false)";
       if($dbc->query($sql) === TRUE){
         $query = "SELECT * from prereqs where crn ='$user_crn'";
         $data = mysqli_query($dbc, $query);
