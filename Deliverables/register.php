@@ -26,7 +26,19 @@ if(isset($_POST['Register'])){
     if($row = mysqli_fetch_array($data) == true){
       $sql = "INSERT INTO enrollment VALUES ('$user_id', '$user_crn', 'Fall', 'Sophomore', NULL, false)";
       if($dbc->query($sql) === TRUE){
-        echo  'Course Added' ;
+        $query = "SELECT * from prereqs where crn ='$user_crn'";
+        $data = mysqli_query($dbc, $query);
+        if($row = mysqli_fetch_array($data) == true){
+          $query = "SELECT * from enrollment join prereqs on enrollment.crn = prereqs.crn where enrollment.crn = '$user_crn' and uid = '$user_id'";
+          $data = mysqli_query($dbc, $query);
+          if($row = mysqli_fetch_array($data) == true){
+            echo  'Course Added' ;
+          }
+          else{
+            $sql = "DELETE FROM enrollment WHERE crn = '$user_crn' = and uid = '$user_id'";
+            echo 'Prerqs Needed' ;
+          }
+        }
       }
       else{
         echo 'Failed To Add Course';

@@ -14,6 +14,14 @@ require_once("navbar.php");
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 $query = "SELECT * FROM enrollment join course on enrollment.crn = course.crn where uid = $user_id";
 $data = mysqli_query($dbc, $query);
+
+
+
+
+
+
+
+
 ?>
 <html>
 <body onload="navbar();">
