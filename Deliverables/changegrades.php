@@ -10,7 +10,7 @@ else if($_SESSION['type'] != 'faculty'){
 
 require_once('connectvars.php');
 require_once("navbar.php");
-$user_id = $_SESSION['uid'];
+$user_id = $_SESSION['viewuid'];
 ?>
 
 
