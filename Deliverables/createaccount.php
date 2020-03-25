@@ -1,12 +1,13 @@
 //start the index page
 <?php
+session_start();
+if(!isset($_SESSION['uid'])){
+	header('Location: login.php');
+}
+else if($_SESSION['type'] != 'admin'){
+	header('Location: index.php');
+}
 
-/*testing variables: TODO delete later
- *
- */
-$_SESSION['viewtype'] = 'admin';
-$_SESSION['viewas'] = '1234';
-$_SESSION['uid'] = '1234';
 require_once('connectvars.php');
 require_once("navbar.php");
 $user_id = $_SESSION['uid'];
