@@ -1,21 +1,25 @@
 //start the index page
 <?php
-
-/*testing variables: TODO delete later
- *
- */
-$_SESSION['viewtype'] = 'admin';
-$_SESSION['viewas'] = '1234';
-$_SESSION['uid'] = '1234';
+session_start();
+if(!isset($_SESSION['uid'])){
+	header('Location: login.php');
+}
+else if($_SESSION['viewtype'] != 'faculty' /*&& $_SESSION['viewtype'] != "student"*/){
+	header('Location: index.php');
+}
+require_once('connectvars.php');
+$user_id = $_SESSION['uid'];
 
 require_once("navbar.php");
-
+$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+$query = "SELECT * FROM enrollment join course on enrollment.crn = course.crn where uid = $user_id";
+$data = mysqli_query($dbc, $query);
 ?>
-
-<body onload="navbar();">
-
 <html>
-<table style="width:100%">
+<body onload="navbar();">
+</body>
+<H4>My Courses</H4>
+<table style="width:50%">
   <tr>
     <th>CRN</th>
     <th>Class</th>
@@ -24,21 +28,17 @@ require_once("navbar.php");
     <th>Location<th>
     <th>Section<th>
   </tr>
+      <?php while( $row = mysqli_fetch_array($data)) { ?>
   <tr>
-    <td>444444</td>
-    <td>Computer Architecture</td>
-    <td>MW</td>
-    <td>12:30<td>
-    <td>3<td>
-    
+    <th><?php echo ''. $row['crn'] ?></th>
+    <th><?php echo ''. $row['name']; ?></th>
+    <th><?php echo ''. $row['day']?></th>
+    <th><?php echo ''. $row['time']?></th>
+    <th><?php echo ''. $row['location']?></th>
+    <th><?php echo ''. $row['section']?></th>
   </tr>
-  <tr>
-    <td>555555</td>
-    <td>Software</td>
-    <td>TR</td>
-    <td>1:30<td>
-    <td>1<td>
-  </tr>
+<?php } ?>
+
 </table>
 </html>
 
@@ -46,4 +46,3 @@ require_once("navbar.php");
 
 
 
-</body>

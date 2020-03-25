@@ -73,7 +73,7 @@
 		}
 	}
 
-	else if(isset($_SESSION['type']) && $_SESSION['type'] == 'faculty' && $_SESSION['viewuid'] != $_SESSION['uid']){
+	else if(isset($_SESSION['type']) && $_SESSION['type'] == 'faculty' /*&& $_SESSION['viewuid'] != $_SESSION['uid']*/){
 		debuginfo();
 		setfaculty(false);
 	}
@@ -161,9 +161,11 @@
 		$navbar[5] = "logout.php";
 		$navbar[6] = "My Grades";
 		$navbar[7] = "mygrades.php";
+		$navbar[8] = "Registration";
+		$navbar[9] = "register.php";
 		if($needsHome == true){
-			$navbar[8] = "Back to my Account";
-			$navbar[9] = "home.php";
+			$navbar[10] = "Back to my Account";
+			$navbar[11] = "home.php";
 		}
 
 		$_SESSION['navbar'] = $navbar;

@@ -5,7 +5,12 @@
 
 
 session_start();
-
+if(!isset($_SESSION['uid'])){
+	header('Location: login.php');
+}
+if($_SESSION['viewtype'] != 'gradsec' && $_SESSION['viewtype'] != 'admin'){
+	header('Location: index.php');
+}
 
 require_once("navbar.php");
 require_once("connectvars.php");
@@ -20,7 +25,12 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 			die("Connection failed: " . mysqli_connect_error());
 			echo "connection refused";
 		}
-		$query = "select concat(fname, ' ', lname) as name, uid from users where lname like '%" . $trimmedsearch . "%' or uid like '%" . $trimmedsearch . "%'";
+		if($_SESSION['viewtype'] == 'gradsec'){
+			$query = "select concat(fname, ' ', lname) as name, uid from users where (lname like '%" . $trimmedsearch . "%' or uid like '%" . $trimmedsearch . "%') and permission != 'admin'";
+		}
+		else{
+			$query = "select concat(fname, ' ', lname) as name, uid from users where lname like '%" . $trimmedsearch . "%' or uid like '%" . $trimmedsearch . "%'";
+		}
 		$data = mysqli_query($dbc, $query);
 		if (!$data) {
     			echo "Error:" .  mysqli_error($dbc);
