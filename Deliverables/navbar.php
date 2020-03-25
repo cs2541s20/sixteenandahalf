@@ -130,7 +130,8 @@
 		else{
 			$navbar[8] = "Other Accounts";
 			$navbar[9] = "otheraccounts.php";
-		}		$_SESSION['navbar'] = $navbar;
+		}		
+		$_SESSION['navbar'] = $navbar;
 	}
 	
 	function setfaculty($needsHome){
@@ -167,7 +168,6 @@
 			$navbar[10] = "Back to my Account";
 			$navbar[11] = "home.php";
 		}
-		echo $navbar;
 		$_SESSION['navbar'] = $navbar;
 	}
 
