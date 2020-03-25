@@ -7,9 +7,9 @@
 $_SESSION['viewtype'] = 'admin';
 $_SESSION['viewas'] = '1234';
 $_SESSION['uid'] = '1234';
-
+require_once('connectvars.php');
 require_once("navbar.php");
-
+$user_id = $_SESSION['uid'];
 ?>
 
 
@@ -24,6 +24,36 @@ echo 'Name must be from letters, dashes, spaces and must not start with dash <br
 }
 }
 ?>
+
+
+<?php
+$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+if(isset($_POST['Create Account'])){
+    $user_email = mysqli_real_escape_string($dbc, trim($_POST['EMAIL']));
+    $query = "SELECT * from users where email ='$user_email'";
+    $data = mysqli_query($dbc, $query);
+    if($row = mysqli_fetch_array($data) == true){
+      $sql = "INSERT INTO enrollment VALUES ('$user_id', '2121 K st', NULL, NULL, NULL, '$user_email', student)";
+      if($dbc->query($sql) === TRUE){
+        echo  'Account Created' ;
+      }
+      else{
+        echo 'Failed to Create Account';
+      }
+      if(!$user_email){
+        echo 'No Results';
+      }
+    }
+    else{
+      echo 'Failed to Create Account';
+    }
+  }
+
+
+
+?>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -59,6 +89,8 @@ echo 'Name must be from letters, dashes, spaces and must not start with dash <br
 
     <label for="other">Anything else you want to add?</label>
     <textarea name="other"></textarea><br />
+    
+
     <input type="submit" value="Create Account" name="Create Account" /><br/><br/>
   </form>
 </body>
