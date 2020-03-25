@@ -39,10 +39,9 @@ if(!$data){
     <th>Last Name </th>
     <th>Email Address</th>
     <th>Permission</th>
-    <?if($isstudent == true){
+    <?phpif($isstudent == true){
       echo "<th>Degree</th>";
       echo "<th>Program</th>";
-	}
      }?>
   </tr>
       <?php while( $row = mysqli_fetch_array($data)) { ?>
@@ -52,7 +51,7 @@ if(!$data){
     <th><?php echo ''. $row['lname'] ?></th>
     <th><?php echo ''. $row['email']?></th>
     <th><?php echo ''. $row['permission']?></th>
-    <?if($isstudent == true){
+    <?php if($isstudent == true){
       echo "<th> {$row['degree']}</th>";
       echo "<th> {$row['program']}</th>";
      }?>
