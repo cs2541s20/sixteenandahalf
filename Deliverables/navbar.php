@@ -73,7 +73,7 @@
 		}
 	}
 
-	else if(isset($_SESSION['type']) && $_SESSION['type'] == 'faculty' && $_SESSION['viewuid'] != $_SESSION['uid']){
+	else if(isset($_SESSION['type']) && $_SESSION['type'] == 'faculty' /*&& $_SESSION['viewuid'] != $_SESSION['uid']*/){
 		debuginfo();
 		setfaculty(false);
 	}
