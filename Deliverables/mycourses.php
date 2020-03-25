@@ -8,7 +8,7 @@ else if($_SESSION['viewtype'] != 'faculty' /*&& $_SESSION['viewtype'] != "studen
 	header('Location: index.php');
 }
 require_once('connectvars.php');
-$user_id = $_SESSION['uid'];
+$user_id = $_SESSION['viewuid'];
 
 require_once("navbar.php");
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);

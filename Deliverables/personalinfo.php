@@ -6,7 +6,7 @@ if(!isset($_SESSION['uid'])){
 
 require_once('connectvars.php');
 
-$user_id = $_SESSION['uid'];
+$user_id = $_SESSION['viewuid'];
 
 require_once("navbar.php");
 
