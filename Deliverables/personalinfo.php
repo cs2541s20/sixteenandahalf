@@ -42,6 +42,7 @@ if(!$data){
     <?if($isstudent == true){
       echo "<th>Degree</th>";
       echo "<th>Program</th>";
+	}
      }?>
   </tr>
       <?php while( $row = mysqli_fetch_array($data)) { ?>
