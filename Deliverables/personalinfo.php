@@ -4,9 +4,6 @@ if(!isset($_SESSION['uid'])){
 	header('Location: login.php');
 }
 
-else if($_SESSION['viewtype'] != "student" && $_SESSION['viewtype'] != 'faculty'){
-        header('Location: index.php');
-}
 require_once('connectvars.php');
 
 $user_id = $_SESSION['uid'];
