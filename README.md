@@ -4,7 +4,7 @@
  - Ada Kilic (ayda000)
  - Cassell Robinson (cassell13)
  - Sam Gassman (samuelgassman7)
- - your gwupyterhub.seas.gwu.edu link to live webpage
+ - http://gwupyterhub.seas.gwu.edu/~sp20DBp1-sixteenandahalf/sixteenandahalf/Deliverables/
  
  ## Important login credentials for your web app
  
