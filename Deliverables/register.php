@@ -14,9 +14,12 @@ $user_id = $_SESSION['uid'];
 
 
 require_once("navbar.php");
+?>
+<html><h3>Course Registration</h3></html>
+<?php
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME); 
 
-if(isset($_POST['submit'])){
+if(isset($_POST['Register'])){
     $user_crn = mysqli_real_escape_string($dbc, trim($_POST['CRN']));
     $query = "SELECT * from course where crn ='$user_crn'";
     $data = mysqli_query($dbc, $query);
@@ -25,9 +28,15 @@ if(isset($_POST['submit'])){
       if($dbc->query($sql) === TRUE){
         echo  'Course Added' ;
       }
+      else{
+        echo 'Failed To Add Course';
+      }
       if(!$user_crn){
         echo 'No Results';
       }
+    }
+    else{
+      echo 'Failed to Add Course';
     }
   }
 
@@ -41,6 +50,6 @@ if(isset($_POST['submit'])){
       <label for="CRN">CRN:</label>
       <input type="text" name="CRN" />
     </fieldset>
-    <input type="submit" value="Log In" name="submit" />
+    <input type="submit" value="submit" name="Register" />
   </form>
   </html>
