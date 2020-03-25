@@ -10,7 +10,7 @@ else if($_SESSION['viewtype'] != "student" && $_SESSION['viewtype'] != 'faculty'
 require_once('connectvars.php');
 
 
-$user_id = $_SESSION['uid'];
+$user_id = $_SESSION['viewuid'];
 
 
 
