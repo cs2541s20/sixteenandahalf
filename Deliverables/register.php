@@ -68,3 +68,44 @@ if(isset($_POST['Register'])){
 
   </body>
   </html>
+
+  <?php 
+  $query = "SELECT * FROM coursedata join course on course.crn = coursedata.crn";
+$data = mysqli_query($dbc, $query);
+?>
+<html>
+<body onload="navbar();">
+
+</body>
+<H4>My Grades</H4>
+<table style="width:50%">
+  <tr>
+    <th>CRN</th>
+    <th>CID</th>
+    <th>Department</th>
+    <th>Course Name</th>
+    <th>Credits</th>
+    <th>Semester</th>
+    <th>Day</th>
+    <th>Time</th>
+    <th>Location</th>
+    <th>Section</th>
+  </tr>
+      <?php while( $row = mysqli_fetch_array($data)) { ?>
+
+  <tr>
+    <th><?php echo ''. $row['crn'] ?></th>
+    <th><?php echo ''. $row['cid']; ?></th>
+    <th><?php echo ''. $row['dept']?></th>
+    <th><?php echo ''. $row['name']?></th>
+    <th><?php echo ''. $row['credits']?></th>
+    <th><?php echo ''. $row['semester']?></th>
+    <th><?php echo ''. $row['day']?></th>
+    <th><?php echo ''. $row['time']?></th>
+    <th><?php echo ''. $row['location']?></th>
+    <th><?php echo ''. $row['section']?></th>
+  </tr>
+<?php } ?>
+
+</table>
+</html>
