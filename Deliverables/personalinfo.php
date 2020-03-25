@@ -12,21 +12,24 @@ require_once("navbar.php");
 
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 if(!$dbc){
-	die("Connection failed ". mysqli_connect_error());
-	echo "connection refused";
+  die("Connection failed ". mysqli_connect_error());
+  echo "connection refused";
 }
 if($_SESSION['type'] == "student"){
-	$isstudent = true;
-	$query = "SELECT * FROM student join users on student.uid = users.uid where student.uid = " . $user_id;
+  $isstudent = true;
+  $query = "SELECT * FROM student join users on student.uid = users.uid where student.uid = " . $user_id;
 }
 else{
-	$isstudent = false;
-	$query = "select * from users where users.uid = " . $user_id;
+  $isstudent = false;
+  $query = "select * from users where users.uid = " . $user_id;
 }
 $data = mysqli_query($dbc, $query);
 if(!$data){
-	echo "Error: " . mysqli_error($dbc);
+  echo "Error: " . mysqli_error($dbc);
+	die("Connection failed ". mysqli_connect_error());
+	echo "connection refused";
 }
+
 ?>
 <html>
 <body onload="navbar();">
@@ -60,11 +63,4 @@ if(!$data){
 
 </table>
 </html>
-
-
-
-
-
-
-
 
