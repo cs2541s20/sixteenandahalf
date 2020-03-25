@@ -15,7 +15,14 @@ if(!$dbc){
 	die("Connection failed ". mysqli_connect_error());
 	echo "connection refused";
 }
-$query = "SELECT * FROM student join users on student.uid = users.uid where student.uid = " . $user_id;
+if($_SESSION['type'] == "student"){
+	$isstudent = true;
+	$query = "SELECT * FROM student join users on student.uid = users.uid where student.uid = " . $user_id;
+}
+else{
+	$isstudent = false;
+	$query = "select * from users where users.uid = " . $user_id;
+}
 $data = mysqli_query($dbc, $query);
 if(!$data){
 	echo "Error: " . mysqli_error($dbc);
@@ -32,8 +39,10 @@ if(!$data){
     <th>Last Name </th>
     <th>Email Address</th>
     <th>Permission</th>
-    <th>Degree</th>
-    <th>Program</th>
+    <?if($isstudent == true){
+      echo "<th>Degree</th>";
+      echo "<th>Program</th>";
+     }?>
   </tr>
       <?php while( $row = mysqli_fetch_array($data)) { ?>
 
@@ -42,8 +51,10 @@ if(!$data){
     <th><?php echo ''. $row['lname'] ?></th>
     <th><?php echo ''. $row['email']?></th>
     <th><?php echo ''. $row['permission']?></th>
-    <th><?php echo ''. $row['degree']?></th>
-    <th><?php echo ''. $row['program']?></th>
+    <?if($isstudent == true){
+      echo "<th> {$row['degree']}</th>";
+      echo "<th> {$row['program']}</th>";
+     }?>
    </tr>
 <?php } ?>
 
