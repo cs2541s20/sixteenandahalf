@@ -14,9 +14,16 @@ $user_id = $_SESSION['uid'];
 require_once("navbar.php");
 
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+if(!$dbc){
+	die("Connection failed ". mysqli_connect_error());
+	echo "connection refused";
+}
 $query = "SELECT * FROM student join users on student.uid = users.uid where student.uid = " . $user_id;
+echo $query;
 $data = mysqli_query($dbc, $query);
-
+if(!$data){
+	echo "Error: " . mysqli_error($dbc);
+}
 ?>
 <html>
 <body onload="navbar();">
