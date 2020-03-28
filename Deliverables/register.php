@@ -16,7 +16,7 @@ $user_id = $_SESSION['viewuid'];
 require_once("navbar.php");
 ?>
 <html><h3>Course Registration</h3>
-<body onload='navbar();'>
+<body onload='navbar();'> </body>
 <?php
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME); 
 
@@ -27,7 +27,7 @@ if(isset($_POST['Register'])){
     if($row = mysqli_fetch_array($data) == true){
       $sql = "INSERT INTO enrollment VALUES ('$user_id', '$user_crn', 'Fall', 'Sophomore', 'IP', false)";
       if($dbc->query($sql) === TRUE){
-        $query = "SELECT * from prereqs where crn ='$user_crn'";
+        $query = "SELECT prereq from enrollment join prereqs on enrollment.crn = prereqs.crn where enrollment.uid = '$user_id' and prereqs.crn = '$user_crn'";
         $data = mysqli_query($dbc, $query);
         if($row = mysqli_fetch_array($data) == true){
           $query = "SELECT * from enrollment join prereqs on enrollment.crn = prereqs.crn where enrollment.crn = '$user_crn' and uid = '$user_id'";
@@ -87,7 +87,7 @@ if(isset($_POST['Drop'])){
     <input type="submit" value="submit" name="Drop" />
   </form>
 
-  </body>
+
   </html>
 
   <?php 
@@ -97,17 +97,17 @@ $data = mysqli_query($dbc, $query);
 <html>
 
 
-</body>
+
 <H4>My Grades</H4>
-<style>
+
+<table style="width:50%"; >
+  <style>
       table, th, td {
       padding: 10px;
       border: 1px solid black; 
       border-collapse: collapse;
       }
     </style>
-<table style="width:50%"; 
- >
   <tr>
     <th>CRN</th>
     <th>CID</th>

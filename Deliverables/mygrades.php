@@ -25,6 +25,13 @@ $data = mysqli_query($dbc, $query);
 </body>
 <H4>My Grades</H4>
 <table style="width:50%">
+  <style>
+      table, th, td {
+      padding: 10px;
+      border: 1px solid black; 
+      border-collapse: collapse;
+      }
+    </style>
   <tr>
     <th>CRN</th>
     <th>Class</th>
