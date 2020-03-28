@@ -36,7 +36,7 @@ if(isset($_POST['Register'])){
             echo  'Course Added' ;
           }
           else{
-            $sql = "DELETE FROM enrollment WHERE crn = '$user_crn' = and uid = '$user_id'";
+            $sql = "DELETE FROM enrollment WHERE enrollment.crn = '$user_crn' = and uid = '$user_id'";
             echo 'Prerqs Needed' ;
           }
         }
@@ -57,13 +57,13 @@ if(isset($_POST['Register'])){
   }
 if(isset($_POST['Drop'])){
   $user_drop = mysqli_real_escape_string($dbc, trim($_POST['drop'])); 
-  $sql = "DELETE FROM enrollment WHERE crn = '$user_crn' = and uid = '$user_id'";
+  $sql = "DELETE FROM enrollment WHERE enrollment.crn = '$user_crn' = and uid = '$user_id'";
   //$data = mysqli_query($dbc, $query);
   if($dbc->query($sql) === TRUE){
     echo "Course Removed";
   }
 
-
+}
 
 
 

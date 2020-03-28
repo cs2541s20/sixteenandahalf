@@ -30,12 +30,12 @@ echo 'Name must be from letters, dashes, spaces and must not start with dash <br
 <?php
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-if(isset($_POST['Create Account'])){
-    $user_email = mysqli_real_escape_string($dbc, trim($_POST['EMAIL']));
+if(isset($_POST['Create_Account'])){
+    $user_email = mysqli_real_escape_string($dbc, trim($_POST['email']));
     $query = "SELECT * from users where email ='$user_email'";
     $data = mysqli_query($dbc, $query);
     if($row = mysqli_fetch_array($data) == true){
-      $sql = "INSERT INTO enrollment VALUES ('$user_id', '2121 K st', NULL, NULL, NULL, '$user_email', student)";
+      $sql = "INSERT INTO enrollment VALUES ('$user_id', NULL, {$_POST['firsname']}, {$_POST['lastname']}, {$_POST['password']}, '$user_email', {$_POST['type_of_user']})";
       if($dbc->query($sql) === TRUE){
         echo  'Account Created' ;
       }
@@ -80,9 +80,9 @@ if(isset($_POST['Create Account'])){
     
     
     <label for="type of user">What type of user?</label>
-    <input type="text" name="type of user" /><br />
+    <input type="text" name="type_of_user" /><br />
 
-    <label for="userrID">Enter userID:</label>
+    <label for="userID">Enter userID:</label>
     <input type="text" name="userID" size="32" /><br />
 
     <label for="password">Enter password?</label>
@@ -92,7 +92,7 @@ if(isset($_POST['Create Account'])){
     <textarea name="other"></textarea><br />
     
 
-    <input type="submit" value="Create Account" name="Create Account" /><br/><br/>
+    <input type="submit" value="Create Account" name="Create_Account" /><br/><br/>
   </form>
 </body>
 </html>
