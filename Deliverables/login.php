@@ -129,7 +129,7 @@ input[type=password] {
 
 
 input[type=text],
-input[type=user_id] {
+input[type=username] {
     color: #777;
     padding-left: 10px;
     margin: 10px;
@@ -194,7 +194,7 @@ background-color:rgba(192,192,192,0.5);
     box-shadow: inset 0 1.5px 3px rgba(190, 190, 190, .4), 0 0 0 5px #f5f7f8;
 }
 
-input[type=user_id] {
+input[type=username] {
     color: #777;
     padding-left: 10px;
     margin: 10px;
