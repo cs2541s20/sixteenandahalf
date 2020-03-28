@@ -204,7 +204,7 @@ input[type=user_id] {
     height: 35px;
     border: 1px solid #c7d0d2;
     border-radius: 2px;
-    box-shadow: inset 0 1.5px 3px rgba(190, 190, 190, .4), 0 0 0 5px #f5f7f8;
+   /* box-shadow: inset 0 1.5px 3px rgba(190, 190, 190, .4), 0 0 0 5px #f5f7f8; */
 
 }
 
@@ -220,7 +220,7 @@ input[type=password] {
     height: 35px;
     border: 1px solid #c7d0d2;
     border-radius: 2px;
-    box-shadow: inset 0 1.5px 3px rgba(190, 190, 190, .4), 0 0 0 5px #f5f7f8;
+   /* box-shadow: inset 0 1.5px 3px rgba(190, 190, 190, .4), 0 0 0 5px #f5f7f8; */
 }
 {font-size: 14px;
     font-weight: bold;
