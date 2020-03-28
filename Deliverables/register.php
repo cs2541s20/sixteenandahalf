@@ -36,9 +36,10 @@ if(isset($_POST['Register'])){
             echo  'Course Added' ;
           }
           else{
-            $sql = "DELETE FROM enrollment WHERE enrollment.crn = '$user_crn' = and uid = '$user_id'";
-            echo 'Prerqs Needed' ;
-          }
+            $sql = "DELETE FROM enrollment WHERE crn = '$user_crn' = and uid = '$user_id'";
+              echo 'Prerqs Needed' ;
+          
+        }
         }
         else{
           echo 'Course Added';
@@ -57,8 +58,7 @@ if(isset($_POST['Register'])){
   }
 if(isset($_POST['Drop'])){
   $user_drop = mysqli_real_escape_string($dbc, trim($_POST['drop'])); 
-  $sql = "DELETE FROM enrollment WHERE enrollment.crn = '$user_crn' = and uid = '$user_id'";
-  //$data = mysqli_query($dbc, $query);
+  $sql = "DELETE FROM enrollment WHERE crn = '$user_drop' and uid = '$user_id'";
   if($dbc->query($sql) === TRUE){
     echo "Course Removed";
   }
@@ -81,7 +81,7 @@ if(isset($_POST['Drop'])){
   <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <fieldset>
       <legend>Drop Class</legend>
-      <label for="drop">drop:</label>
+      <label for="drop">Drop:</label>
       <input type="text" name="drop" />
     </fieldset>
     <input type="submit" value="submit" name="Drop" />
@@ -95,11 +95,19 @@ if(isset($_POST['Drop'])){
 $data = mysqli_query($dbc, $query);
 ?>
 <html>
-<body onload="navbar();">
+
 
 </body>
 <H4>My Grades</H4>
-<table style="width:50%">
+<style>
+      table, th, td {
+      padding: 10px;
+      border: 1px solid black; 
+      border-collapse: collapse;
+      }
+    </style>
+<table style="width:50%"; 
+ >
   <tr>
     <th>CRN</th>
     <th>CID</th>
@@ -108,7 +116,8 @@ $data = mysqli_query($dbc, $query);
     <th>Credits</th>
     <th>Semester</th>
     <th>Day</th>
-    <th>Time</th>
+    <th>Start Time</th>
+    <th>End Time</th>
     <th>Location</th>
     <th>Section</th>
   </tr>
@@ -122,7 +131,8 @@ $data = mysqli_query($dbc, $query);
     <th><?php echo ''. $row['credits']?></th>
     <th><?php echo ''. $row['semester']?></th>
     <th><?php echo ''. $row['day']?></th>
-    <th><?php echo ''. $row['time']?></th>
+    <th><?php echo ''. $row['starttime']?></th>
+    <th><?php echo ''. $row['endtime']?></th>
     <th><?php echo ''. $row['location']?></th>
     <th><?php echo ''. $row['section']?></th>
   </tr>
