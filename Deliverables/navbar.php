@@ -1,4 +1,9 @@
 
+
+
+
+
+
 <html>
 <head>
         <link rel="stylesheet" href="style.css">
@@ -8,7 +13,61 @@
     <img src="logoIndex.png">
 	</header>
      </body>
+<style>
+header img {
+    height: 80px;
+}
+header img {
+    height: 80px;
+}
+body {
+    height: 125vh;
+    background-image: url("backgroundNAV.jpg");
+    background-size: cover;
+    font-family: sans-serif;
+    margin-top: 80px;
+    padding: 30px;
+
+}
+header img {
+    height: 80px;
+}
+
+main {
+    color: white; 
+
+
+}
+header {
+   background-color: white;
+  
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    display: flex;
+    text-align: center; 
+
+    box-shadow: 0 0 25px 0 black;
+
+}
+ 
+header  {
+    display: inline;
+}
+header  {
+    margin: 20px;
+}
+header  {
+    color: black;
+    text-decoration: none;
+}
+
+</style>
+
 </html>
+
 
 
 
