@@ -30,19 +30,21 @@ if(isset($_POST['Register'])){
         $query = "SELECT prereq from enrollment join prereqs on enrollment.crn = prereqs.crn where enrollment.uid = '$user_id' and prereqs.crn = '$user_crn'";
         $data = mysqli_query($dbc, $query);
         while( $row = mysqli_fetch_array($data)){
-          $needed_prereq = $row['prereq'];
-          $query = "SELECT crn from enrollment where uid = '$user_id' and crn = '$needed_prereq'";
-          $result = mysqli_query($dbc, $query);
-          if (!($result->num_rows > 0)) {
-            $sql = "DELETE FROM enrollment WHERE crn = '$user_crn' and uid = '$user_id'";
-            if($dbc->query($sql) === TRUE){
-              echo "Prereq Needed";
-            }
+          $query = "SELECT pre"
+        }
+          $query = "SELECT * from enrollment join prereqs on enrollment.crn = prereqs.crn where enrollment.crn = '$user_crn' and uid = '$user_id'";
+          $data = mysqli_query($dbc, $query);
+          if($row = mysqli_fetch_array($data) == true){
+            echo  'Course Added' ;
           }
           else{
-            echo "Course Added prereqs met";
+            $sql = "DELETE FROM enrollment WHERE crn = '$user_crn' = and uid = '$user_id'";
+              echo 'Prerqs Needed' ;
+          
           }
-
+        }
+        else{
+          echo 'Course Added';
         }
       }
       else{
@@ -52,11 +54,9 @@ if(isset($_POST['Register'])){
         echo 'No Results';
       }
     }
-  else{
-  echo 'Failed to Add Course';
-  }
-}
-
+    else{
+      echo 'Failed to Add Course';
+    }
   // this was also supposedly extra, I'm commenting it out}
 if(isset($_POST['Drop'])){
   $user_drop = mysqli_real_escape_string($dbc, trim($_POST['drop'])); 
@@ -66,6 +66,8 @@ if(isset($_POST['Drop'])){
   }
 
 }
+
+
 
 ?>
 

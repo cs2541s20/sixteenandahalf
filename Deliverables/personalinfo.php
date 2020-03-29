@@ -6,7 +6,7 @@ if(!isset($_SESSION['uid'])){
 
 require_once('connectvars.php');
 
-$user_id = $_SESSION['uid'];
+$user_id = $_SESSION['viewuid'];
 
 require_once("navbar.php");
 
@@ -15,7 +15,7 @@ if(!$dbc){
   die("Connection failed ". mysqli_connect_error());
   echo "connection refused";
 }
-if($_SESSION['type'] == "student"){
+if($_SESSION['viewtype'] == "student"){
   $isstudent = true;
   $query = "SELECT * FROM student join users on student.uid = users.uid where student.uid = " . $user_id;
 }
@@ -42,6 +42,7 @@ if(!$data){
     <th>Last Name </th>
     <th>Email Address</th>
     <th>Permission</th>
+    <th>Address</th>
     <?php if($isstudent == true){
       echo "<th>Degree</th>";
       echo "<th>Program</th>";
@@ -54,6 +55,7 @@ if(!$data){
     <th><?php echo ''. $row['lname'] ?></th>
     <th><?php echo ''. $row['email']?></th>
     <th><?php echo ''. $row['permission']?></th>
+    <th><?php echo ''. $row['address']?></th>
     <?php if($isstudent == true){
       echo "<th> {$row['degree']}</th>";
       echo "<th> {$row['program']}</th>";
