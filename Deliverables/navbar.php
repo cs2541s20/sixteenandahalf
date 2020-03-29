@@ -1,3 +1,18 @@
+
+<html>
+<head>
+        <link rel="stylesheet" href="style.css">
+</head>
+     <body>
+	<header>
+    <img src="logoIndex.png">
+	</header>
+     </body>
+</html>
+
+
+
+
 <?php
 
 	//$filename = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1); 

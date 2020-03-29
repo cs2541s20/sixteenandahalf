@@ -9,14 +9,14 @@ else if($_SESSION['viewtype'] != "student" /*&& $_SESSION['viewtype'] != 'facult
 require_once('connectvars.php');
 
 
-$user_id = $_SESSION['uid'];
+$user_id = $_SESSION['viewuid'];
 
 
 
 require_once("navbar.php");
 ?>
 <html><h3>Course Registration</h3>
-<body onload="navbar();">
+<body onload='navbar();'> </body>
 <?php
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME); 
 
@@ -25,9 +25,27 @@ if(isset($_POST['Register'])){
     $query = "SELECT * from course where crn ='$user_crn'";
     $data = mysqli_query($dbc, $query);
     if($row = mysqli_fetch_array($data) == true){
-      $sql = "INSERT INTO enrollment VALUES ('$user_id', '$user_crn', 'Fall', 'Sophomore', NULL, false)";
+      $sql = "INSERT INTO enrollment VALUES ('$user_id', '$user_crn', 'Fall', 'Sophomore', 'IP', false)";
       if($dbc->query($sql) === TRUE){
-        echo  'Course Added' ;
+        $query = "SELECT prereq from enrollment join prereqs on enrollment.crn = prereqs.crn where enrollment.uid = '$user_id' and prereqs.crn = '$user_crn'";
+        $data = mysqli_query($dbc, $query);
+        while( $row = mysqli_fetch_array($data)){
+          $query = "SELECT pre"
+        }
+          $query = "SELECT * from enrollment join prereqs on enrollment.crn = prereqs.crn where enrollment.crn = '$user_crn' and uid = '$user_id'";
+          $data = mysqli_query($dbc, $query);
+          if($row = mysqli_fetch_array($data) == true){
+            echo  'Course Added' ;
+          }
+          else{
+            $sql = "DELETE FROM enrollment WHERE crn = '$user_crn' = and uid = '$user_id'";
+              echo 'Prerqs Needed' ;
+          
+        }
+        }
+        else{
+          echo 'Course Added';
+        }
       }
       else{
         echo 'Failed To Add Course';
@@ -40,6 +58,14 @@ if(isset($_POST['Register'])){
       echo 'Failed to Add Course';
     }
   }
+if(isset($_POST['Drop'])){
+  $user_drop = mysqli_real_escape_string($dbc, trim($_POST['drop'])); 
+  $sql = "DELETE FROM enrollment WHERE crn = '$user_drop' and uid = '$user_id'";
+  if($dbc->query($sql) === TRUE){
+    echo "Course Removed";
+  }
+
+}
 
 
 
@@ -54,5 +80,65 @@ if(isset($_POST['Register'])){
     <input type="submit" value="submit" name="Register" />
   </form>
 
-</body>
+  <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    <fieldset>
+      <legend>Drop Class</legend>
+      <label for="drop">Drop:</label>
+      <input type="text" name="drop" />
+    </fieldset>
+    <input type="submit" value="submit" name="Drop" />
+  </form>
+
+
+  </html>
+
+  <?php 
+  $query = "SELECT * FROM coursedata join course on course.crn = coursedata.crn";
+$data = mysqli_query($dbc, $query);
+?>
+<html>
+
+
+
+<H4>My Grades</H4>
+
+<table style="width:50%"; >
+  <style>
+      table, th, td {
+      padding: 10px;
+      border: 1px solid black; 
+      border-collapse: collapse;
+      }
+    </style>
+  <tr>
+    <th>CRN</th>
+    <th>CID</th>
+    <th>Department</th>
+    <th>Course Name</th>
+    <th>Credits</th>
+    <th>Semester</th>
+    <th>Day</th>
+    <th>Start Time</th>
+    <th>End Time</th>
+    <th>Location</th>
+    <th>Section</th>
+  </tr>
+      <?php while( $row = mysqli_fetch_array($data)) { ?>
+
+  <tr>
+    <th><?php echo ''. $row['crn'] ?></th>
+    <th><?php echo ''. $row['cid']; ?></th>
+    <th><?php echo ''. $row['dept']?></th>
+    <th><?php echo ''. $row['name']?></th>
+    <th><?php echo ''. $row['credits']?></th>
+    <th><?php echo ''. $row['semester']?></th>
+    <th><?php echo ''. $row['day']?></th>
+    <th><?php echo ''. $row['starttime']?></th>
+    <th><?php echo ''. $row['endtime']?></th>
+    <th><?php echo ''. $row['location']?></th>
+    <th><?php echo ''. $row['section']?></th>
+  </tr>
+<?php } ?>
+
+</table>
 </html>
