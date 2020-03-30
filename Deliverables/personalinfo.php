@@ -44,12 +44,10 @@ if(!$data){
 }
 
 
-if(isset($_POST['Update Address'])){
-       $new_address = mysqli_real_escape_string($dbc, trim($_POST['New Address']));
-       /*    $user_ID= mysqli_real_escape_string($dbc, trim($_POST['userID'])); */
+if(isset($_POST['Update_Address'])){
+       $new_address = mysqli_real_escape_string($dbc, trim($_POST['New_Address']));
        
-       if($row = mysqli_fetch_array($data) == true){
-      	$sql = "UPDATE users SET address ='$new_address' WHERE uid = '$user_id'";
+       $sql = "UPDATE users SET address ='$new_address' WHERE uid = '$user_id'";
       if($dbc->query($sql) === TRUE){
         echo  'Address Updated Successfully' ;
       }
@@ -57,7 +55,7 @@ if(isset($_POST['Update Address'])){
         echo 'Failed to Update Address';
       }
     }
-}
+
 
 
 ?>
@@ -73,9 +71,9 @@ if(isset($_POST['Update Address'])){
     <fieldset>
       <legend>Change Address</legend>
       <label for="New Address">New Address:</label>
-      <input type="text" name="New Address" />
+      <input type="text" name="New_Address" />
     </fieldset>
-    <input type="submit" value="Update Address" name="Change Address" />
+    <input type="submit" value="Update Address" name="Update_Address" />
   </form>
 </body>
 <H4>Personal Information</H4>

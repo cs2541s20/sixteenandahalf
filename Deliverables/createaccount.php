@@ -14,19 +14,6 @@ $user_id = $_SESSION['viewuid'];
 ?>
 
 
-<?php 
-
-if(isset($_POST['firstname'])){
-
-$firstname = $_POST['firstname'];
-if(preg_match("/^[a-zA-Z -]+$/", $_POST["firstname"]) === 0) {
-$errName = '<p class="errText">Name must be from letters, dashes, spaces and must not start with dash</p>';
-echo 'Name must be from letters, dashes, spaces and must not start with dash <br/>';
-}
-}
-?>
-
-
 <?php
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -34,6 +21,10 @@ if(isset($_POST['Create_Account'])){
   $errVal = "";
   echo "<br><br><br><br><br><br>creating";
   $user_email = mysqli_real_escape_string($dbc, trim($_POST['email']));
+  if (!filter_var($user_email, FILTER_VALIDATE_EMAIL)){
+    $errVal = '1';
+    echo '<br/><p class="errText">Invalid Email Address Entered</p><br/>';
+  }
   
   $first_name = mysqli_real_escape_string($dbc, trim($_POST['firstname']));
   if(preg_match("/^[a-zA-Z -]+$/", $first_name) === 0) {
@@ -83,10 +74,10 @@ if(isset($_POST['Create_Account'])){
     else{
       echo 'Failed to Create Account. Account ID already exists.';
     }
-    /*if(!$user_email){
-      echo 'No Results';
-    }*/
-  //}
+  }
+  else{
+    echo "Please fix the above issues, and then retry creating the account.";
+  }
 }
 
 
