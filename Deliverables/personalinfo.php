@@ -42,6 +42,25 @@ $data = mysqli_query($dbc, $query);
 if(!$data){
 	echo "Error: " . mysqli_error($dbc);
 }
+
+
+if(isset($_POST['Update Address'])){
+	$new_address = mysqli_real_escape_string($dbc, trim($_POST['New Address']));
+	   if($row = mysqli_fetch_array($data) == true){
+      $sql = "UPDATE users SET  address ='$new_address' WHERE uid = '$user_id'";
+      if($dbc->query($sql) === TRUE){
+        echo  'Address Updated Successfully' ;
+      }
+      else{
+        echo 'Failed to Update Adress';
+      }
+         }
+}
+
+
+
+
+
 ?>
 <html>
 <body onload="navbar();">
@@ -51,7 +70,7 @@ if(!$data){
       <label for="New Address">New Address:</label>
       <input type="text" name="New Address" />
     </fieldset>
-    <input type="submit" value="submit" name="Change Address" />
+    <input type="submit" value="Update Address" name="Change Address" />
   </form>
 </body>
 <H4>Personal Information</H4>

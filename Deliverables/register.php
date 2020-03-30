@@ -25,7 +25,7 @@ if(isset($_POST['Register'])){
     echo $user_cid;
     $query = "SELECT crn from coursedata where cid ='$user_cid'";
     $data = mysqli_query($dbc, $query);
-    if(($row2 = mysqli_fetch_array($data)) == true){
+    if(($row2 = mysqli_fetch_array($data)) == TRUE){
       $user_crn = $row2['crn'];
       echo $user_crn;
       $sql = "INSERT INTO enrollment VALUES ('$user_id', '$user_crn', 'Fall', 'Sophomore', 'IP', false)";
@@ -36,7 +36,7 @@ if(isset($_POST['Register'])){
           $needed_prereq = $row['prereq'];
           $query = "SELECT crn from enrollment where uid = '$user_id' and crn = '$needed_prereq'";
           $result = mysqli_query($dbc, $query);
-          if ($row = mysqli_fetch_array($data) == false) {
+          if ($row = mysqli_fetch_array($result) == FALSE) {
             $sql = "DELETE FROM enrollment WHERE crn = '$user_crn' and uid = '$user_id'";
             if($dbc->query($sql) === TRUE){
               echo "Prereq Needed";
@@ -67,7 +67,6 @@ if(isset($_POST['Drop'])){
   if($dbc->query($sql) === TRUE){
     echo "Course Removed";
   }
-
 }
 
 ?>
