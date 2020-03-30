@@ -60,10 +60,31 @@ div.navdiv {
        	z-index: 1;
         color: black;
         text-decoration: none;        	
+	text-shadow:0px 0px 1px #FFF;
+	line-height: 80px;
+	text-decoration: none;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 29px;
+	color: #371C1C;
+
+	text-decoration:none;
+	color:#222;
+	padding:2px 2px 2px 4px;
+	margin:2px;
+	display:block;
 
 }
 
-/* .welcome  */
+
+
+ .welcome  {
+        position: fixed;
+	top: 14px;
+	left: 600;
+        z-index: 1;
+        color: black;
+        text-decoration: none;
+ }
 
 header navlink {
     display: inline;
