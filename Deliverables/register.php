@@ -21,10 +21,13 @@ require_once("navbar.php");
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME); 
 
 if(isset($_POST['Register'])){
-    $user_crn = mysqli_real_escape_string($dbc, trim($_POST['CRN']));
-    $query = "SELECT * from course where crn ='$user_crn'";
+    $user_cid = mysqli_real_escape_string($dbc, trim($_POST['CRN']));
+    echo $user_cid;
+    $query = "SELECT crn from coursedata where cid ='$user_cid'";
     $data = mysqli_query($dbc, $query);
-    if($row = mysqli_fetch_array($data) == true){
+    if(($row2 = mysqli_fetch_array($data)) == true){
+      $user_crn = $row2['crn'];
+      echo $user_crn;
       $sql = "INSERT INTO enrollment VALUES ('$user_id', '$user_crn', 'Fall', 'Sophomore', 'IP', false)";
       if($dbc->query($sql) === TRUE){
         $query = "SELECT prereq from enrollment join prereqs on enrollment.crn = prereqs.crn where enrollment.uid = '$user_id' and prereqs.crn = '$user_crn'";
@@ -33,7 +36,7 @@ if(isset($_POST['Register'])){
           $needed_prereq = $row['prereq'];
           $query = "SELECT crn from enrollment where uid = '$user_id' and crn = '$needed_prereq'";
           $result = mysqli_query($dbc, $query);
-          if (!($result->num_rows > 0)) {
+          if ($row = mysqli_fetch_array($data) == false) {
             $sql = "DELETE FROM enrollment WHERE crn = '$user_crn' and uid = '$user_id'";
             if($dbc->query($sql) === TRUE){
               echo "Prereq Needed";
@@ -46,14 +49,14 @@ if(isset($_POST['Register'])){
         }
       }
       else{
-        echo 'Failed To Add Course';
+        echo 'Failed To Add Course Error 1';
       }
-      if(!$user_crn){
+      if(!$user_cid){
         echo 'No Results';
       }
     }
   else{
-  echo 'Failed to Add Course';
+  echo 'Failed to Add Course error 2';
   }
 }
 
@@ -72,7 +75,7 @@ if(isset($_POST['Drop'])){
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <fieldset>
       <legend>Course Register</legend>
-      <label for="CRN">CRN:</label>
+      <label for="CRN">CID:</label>
       <input type="text" name="CRN" />
     </fieldset>
     <input type="submit" value="submit" name="Register" />
