@@ -39,7 +39,7 @@ if(isset($_POST['Create Account'])){
 	$user_ID = mysqli_real_escape_string($dbc, trim($_POST['userID']));
         $add_ress = mysqli_real_escape_string($dbc, trim($_POST['address']));
       if($row = mysqli_fetch_array($data) == true){
-      $sql = "INSERT INTO enrollment VALUES ('$user_ID', '$add_ress', '$firstname', '$lastname', '$password', '$email','$type_of_user')";
+      $sql = "INSERT INTO enrollment VALUES ('$user_ID', '$add_ress', '$first_name', '$last_name', '$pass_word', '$user_email','$type_of_user')";
       if($dbc->query($sql) === TRUE){
         echo  'Account Created' ;
       }
