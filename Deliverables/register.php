@@ -98,7 +98,7 @@ $data = mysqli_query($dbc, $query);
 
 
 
-<H4>My Grades</H4>
+<H4>Course List</H4>
 
 <table style="width:50%"; >
   <style>

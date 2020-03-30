@@ -48,15 +48,27 @@ header {
     height: 80px;
     display: flex;
     text-align: center; 
-
-    box-shadow: 0 0 25px 0 black;
+  box-shadow: 2px -3px 22px 1px black;
+  /*  box-shadow: 0 0 25px 0 black; */
 
 }
- 
-header  {
+div.navdiv {
+	
+	top: 25px;
+	position: fixed;
+	left: 120;
+       	z-index: 1;
+        color: black;
+        text-decoration: none;        	
+
+}
+
+/* .welcome  */
+
+header navlink {
     display: inline;
 }
-header  {
+header navlink  {
     margin: 20px;
 }
 header  {
@@ -285,9 +297,11 @@ function navbar(){
 		}
 		console.log("The value is: \"" + loggedin + "\"");
 		var navdiv = document.createElement("DIV");
-		navdiv.className = "navmenu";
+		navdiv.className = "navdiv";
 		var navtable = document.createElement("TABLE");
+		navtable.className = "navtable";
 		var navtr = document.createElement("TR");
+		navtr.className = "navtablerow";
 		var navname = <?php echo json_encode($_SESSION['navbar']); ?>;
 		for(var i = 0; i<navname.length; i+=2){
 			if(window.location.href.includes(navname[i+1])){
@@ -295,10 +309,11 @@ function navbar(){
 			}
 			if(navname[i] != ""){
 				var navtd = document.createElement("TD");
+				navtd.className = "navtd";
 				var minicontainer = document.createElement("DIV");
 				minicontainer.className = "navitem";
 				var navlink = document.createElement("A");
-				navlink.className = "navitem";
+				navlink.className = "navlink";
 				navlink.innerHTML = navname[i];
 				navlink.href = navname[i+1];
 				minicontainer.appendChild(navlink);
