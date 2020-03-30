@@ -43,7 +43,7 @@ if(isset($_POST['Register'])){
             }
           }
           else{
-            echo "Course Added prereqs met";
+            echo "Prereqs Met";
           }
 
         }
@@ -58,6 +58,7 @@ if(isset($_POST['Register'])){
   else{
   echo 'Failed to Add Course error 2';
   }
+  //Adding time check
 }
 
   // this was also supposedly extra, I'm commenting it out}
@@ -83,7 +84,7 @@ if(isset($_POST['Drop'])){
   <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <fieldset>
       <legend>Drop Class</legend>
-      <label for="drop">Drop:</label>
+      <label for="drop">CRN Drop:</label>
       <input type="text" name="drop" />
     </fieldset>
     <input type="submit" value="submit" name="Drop" />

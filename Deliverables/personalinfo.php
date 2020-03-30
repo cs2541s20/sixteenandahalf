@@ -45,24 +45,29 @@ if(!$data){
 
 
 if(isset($_POST['Update Address'])){
-	$new_address = mysqli_real_escape_string($dbc, trim($_POST['New Address']));
-	   if($row = mysqli_fetch_array($data) == true){
-      $sql = "UPDATE users SET  address ='$new_address' WHERE uid = '$user_id'";
+       $new_address = mysqli_real_escape_string($dbc, trim($_POST['New Address']));
+       /*    $user_ID= mysqli_real_escape_string($dbc, trim($_POST['userID'])); */
+       
+       if($row = mysqli_fetch_array($data) == true){
+      	$sql = "UPDATE users SET address ='$new_address' WHERE uid = '$user_id'";
       if($dbc->query($sql) === TRUE){
         echo  'Address Updated Successfully' ;
       }
       else{
-        echo 'Failed to Update Adress';
+        echo 'Failed to Update Address';
       }
-         }
+    }
 }
 
 
-
-
-
 ?>
-<html>
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <body onload="navbar();">
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <fieldset>

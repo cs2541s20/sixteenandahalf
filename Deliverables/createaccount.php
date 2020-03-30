@@ -47,7 +47,19 @@ if(isset($_POST['Create_Account'])){
     echo '<br/><p class="errText">Last name must be from letters, dashes, spaces and must not start with dash</p><br/>';
   }
   
-  $pass_word = mysqli_real_escape_string($dbc, trim($_POST['password']));
+  $pass_word = mysqli_real_escape_string($dbc, $_POST['password']);
+  /*note for the poor soul reading my regex...
+   *^$ -- line boundary, must contain all of the following without anything extra on the left or right
+   *(?=........) -- positive lookahead to check that some x pattern is there. I check for a number, an uppercase and lowercase letter, and any character within that ascii range (all the possible special chars)
+   *[\x20-\x7e]{8,} -- must contain at least 8 typable characters from the ascii table.
+   *
+   * Really, this long mess just checks what is written below in the echo message. There are no capturing groups by the way, the special character positive lookahead contains (?:) for do not capture.
+   */
+  if(preg_match("/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*(?:[\x21-\x2f]|[\x3a-\x40]|[\x5b-\x60]|[\x7b-\x7e]))[\x20-\x7e]{8,}$/", $pass_word) === 0) {
+    $errVal = '1';
+    echo '<br/><p class="errText">Password must contain both uppercase and lowercase letters, a number, a special character, and be at least 8 characters long.</p><br/>';
+  }
+
   
   $type_of_user = mysqli_real_escape_string($dbc, trim($_POST['type_of_user']));
   if(preg_match("/^(student|faculty|gradsec|admin)$/", $type_of_user) === 0) {
@@ -56,14 +68,20 @@ if(isset($_POST['Create_Account'])){
   }
   
   $user_ID = mysqli_real_escape_string($dbc, trim($_POST['userID']));
+  if(preg_match("/^[1-9]\d{7}$/", $user_ID) === 0) {
+    $errVal = '1';
+    echo '<br/><p class="errText">First Name must be from letters, dashes, spaces and must not start with dash</p><br/>';
+  }
+
+
   $add_ress = mysqli_real_escape_string($dbc, trim($_POST['address']));
-  //if($row = mysqli_fetch_array($data) == true){
+  if($errVal == ''){
     $sql = "INSERT INTO users VALUES ('$user_ID', '$add_ress', '$first_name', '$last_name', '$pass_word', '$user_email','$type_of_user')";
     if($dbc->query($sql) === TRUE){
-      echo  'Account Created' ;
+      echo  'Account Created.' ;
     }
     else{
-      echo 'Failed to Create Account';
+      echo 'Failed to Create Account. Account ID already exists.';
     }
     /*if(!$user_email){
       echo 'No Results';
