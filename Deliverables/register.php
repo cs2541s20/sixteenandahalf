@@ -59,6 +59,7 @@ if(isset($_POST['Register'])){
   echo 'Failed to Add Course error 2';
   }
   //Adding time check
+  $query = "SELECT crn from coursedata where cid ='$user_cid'";
 }
 
   // this was also supposedly extra, I'm commenting it out}

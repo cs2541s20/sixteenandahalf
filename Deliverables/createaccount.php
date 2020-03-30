@@ -46,7 +46,7 @@ if(isset($_POST['Create_Account'])){
    *
    * Really, this long mess just checks what is written below in the echo message. There are no capturing groups by the way, the special character positive lookahead contains (?:) for do not capture.
    */
-  if(preg_match("/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*(?:[\x21-\x2f]|[\x3a-\x40]|[\x5b-\x60]|[\x7b-\x7e]))[\x20-\x7e]{8,}$/", $pass_word) === 0) {
+  if(preg_match("/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*(?:[!-\/]|[:-@]|[[-`]|[{-~]))[ -~]{8,}$/", $pass_word) === 0) {
     $errVal = '1';
     echo '<br/><p class="errText">Password must contain both uppercase and lowercase letters, a number, a special character, and be at least 8 characters long.</p><br/>';
   }
