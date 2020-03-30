@@ -31,11 +31,15 @@ echo 'Name must be from letters, dashes, spaces and must not start with dash <br
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 if(isset($_POST['Create Account'])){
-    $user_email = mysqli_real_escape_string($dbc, trim($_POST['EMAIL']));
-    $query = "SELECT * from users where email ='$user_email'";
-    $data = mysqli_query($dbc, $query);
-    if($row = mysqli_fetch_array($data) == true){
-      $sql = "INSERT INTO enrollment VALUES ('$user_id', '2121 K st', NULL, NULL, NULL, '$user_email', student)";
+	$user_email = mysqli_real_escape_string($dbc, trim($_POST['email']));
+	$first_name = mysqli_real_escape_string($dbc, trim($_POST['firstname']));
+        $last_name = mysqli_real_escape_string($dbc, trim($_POST['lastname']));
+        $pass_word = mysqli_real_escape_string($dbc, trim($_POST['password']));
+        $type_of_user = mysqli_real_escape_string($dbc, trim($_POST['type of user']));
+	$user_ID = mysqli_real_escape_string($dbc, trim($_POST['userID']));
+        $add_ress = mysqli_real_escape_string($dbc, trim($_POST['address']));
+      if($row = mysqli_fetch_array($data) == true){
+      $sql = "INSERT INTO enrollment VALUES ('$user_ID', '$add_ress', '$firstname', '$lastname', '$password', '$email','$type_of_user')";
       if($dbc->query($sql) === TRUE){
         echo  'Account Created' ;
       }
@@ -88,9 +92,8 @@ if(isset($_POST['Create Account'])){
     <label for="password">Enter password?</label>
     <input type="text" name="password" size="32" /><br />
 
-    <label for="other">Anything else you want to add?</label>
-    <textarea name="other"></textarea><br />
-    
+    <label for="address">Enter Address?</label>
+    <input type="text" name="address" size="32" /><br />
 
     <input type="submit" value="Create Account" name="Create Account" /><br/><br/>
   </form>
