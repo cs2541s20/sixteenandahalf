@@ -87,7 +87,7 @@ if(isset($_POST['Create Account'])){
     <input type="text" name="type of user" /><br />
 
     <label for="userrID">Enter userID:</label>
-    <input type="text" name="userID" size="32" /><br />
+    <input type="number" name="userID" size="8" /><br />
 
     <label for="password">Enter password?</label>
     <input type="text" name="password" size="32" /><br />
