@@ -37,6 +37,7 @@ CREATE TABLE `enrollment` (
 
 CREATE TABLE `course` (
   `crn` int AUTO_INCREMENT,
+  `cid` int,
   `day` varchar(10),
   `starttime` int(4),
   `endtime` int(4),
@@ -90,8 +91,8 @@ INSERT INTO users VALUES (77777777, '2121 h st', 'Rad', 'Hecretary', 'password',
 INSERT INTO users VALUES (88888888, '211 meg rd', 'Billie', 'Holiday', 'password', 'bholiday@gwu.edu', 'student'); 
 INSERT INTO users VALUES (99999999, '211 meg rd', 'Diana', 'Krall', 'password', 'dkrall@gwu.edu', 'student');
 INSERT INTO users VALUES (10101010, '1212 g st', 'Bhagi', 'Narahari', 'password', 'narahari@gwu.edu', 'faculty');
-INSERT INTO users VALUES (20202020, '2222 g st', 'Choi', 'Buckets', 'password', 'cbuckets@gwu.edu', 'gradsec');
-
+INSERT INTO users VALUES (20202020, '2222 g st', 'Choi', 'Buckets', 'password', 'cbuckets@gwu.edu', 'faculty');
+INSERT INTO users VALUES (11110000, '329 k st', 'Prof', 'Fessor', 'password', 'pfesser@gwu.edu', 'faculty');
 
 
 INSERT INTO student VALUES (12121212, 'yes', 'Physics', 'Undergraduate');
@@ -100,63 +101,67 @@ INSERT INTO student VALUES (88888888, 'yes', 'CSCI', 'Graduate');
 INSERT INTO student VALUES (99999999, 'yes', 'Undecided', 'Graduate');
 
 
-INSERT INTO enrollment VALUES (12121212, 1222, 'Fall', 'Junior', 'A', false);
-INSERT INTO enrollment VALUES (12121212, 5555, 'Fall', 'Junior', 'B', false);
-INSERT INTO enrollment VALUES (55555555, 1222, 'Fall', 'Freshman', 'C', false);
-INSERT INTO enrollment VALUES (55555555, 4444, 'Fall', 'Freshman', 'B', false);
-INSERT INTO enrollment VALUES (88888888, 6461, 'Fall', 'Graduate', 'B', false);
-INSERT INTO enrollment VALUES (88888888, 6212, 'Fall', 'Graduate', 'B', false);
+INSERT INTO enrollment VALUES (12121212, 1, 'Fall', 'Junior', 'A', false);
+INSERT INTO enrollment VALUES (12121212, 22, 'Fall', 'Junior', 'B', false);
+INSERT INTO enrollment VALUES (55555555, 1, 'Fall', 'Freshman', 'C', false);
+INSERT INTO enrollment VALUES (55555555, 23, 'Fall', 'Freshman', 'B', false);
+INSERT INTO enrollment VALUES (88888888, 2, 'Fall', 'Graduate', 'B', false);
+INSERT INTO enrollment VALUES (88888888, 3, 'Fall', 'Graduate', 'B', false);
 
 
-INSERT INTO course VALUES (1222, 'Monday', 1030, 1145,'Philips 201', 30);
-INSERT INTO course VALUES (5555, 'Thursday', 1030, 1145, 'Rome 401', 10);
-INSERT INTO course VALUES (4444, 'Monday', 1130,1245, 'Tompkins 201', 30);
-INSERT INTO course VALUES (6221, 'Monday', 1500, 1730, 'Philips 201', 10);
-INSERT INTO course VALUES (6461,  'Tuesday', 1500, 1730, 'Rome 401', 30);
-INSERT INTO course VALUES (6212, 'Wednesday', 1500, 1730, 'Tompkins 201', 30);
-INSERT INTO course VALUES (6232, 'Monday', 1800, 2030, 'Philips 201', 10);
-INSERT INTO course VALUES (6233, 'Tuesday', 1800, 2030, 'Rome 201', 10);
-INSERT INTO course VALUES (6241, 'Wednesday', 1800, 2030, 'Tompkins 201', 10);
-INSERT INTO course VALUES (6242, 'Friday', 1800, 2030, 'Rome 401', 30);
-INSERT INTO course VALUES (6246, 'Tuesday', 1500, 1730, 'Rome 401', 10);
-INSERT INTO course VALUES (6251, 'Monday', 1800, 2030, 'Tompkins 201', 30);
-INSERT INTO course VALUES (6254, 'Monday', 1530, 1800, 'Philips 201', 30);
-INSERT INTO course VALUES (6260, 'Friday', 1800, 2030, 'Rome 401', 10);
-INSERT INTO course VALUES (6262, 'Wednesday', 1800, 2030, 'Tompkins 201', 30);
-INSERT INTO course VALUES (6283, 'Tuesday', 1800, 2030, 'Philips 201', 30);
-INSERT INTO course VALUES (6284, 'Monday', 1800, 2030, 'Tompkins 201', 30);
-INSERT INTO course VALUES (6286, 'Wednesday', 1800, 2030, 'Rome 401', 10);
-INSERT INTO course VALUES (6384, 'Wednesday', 1500, 1730, 'Philips 201', 30);
-INSERT INTO course VALUES (6210, 'Wednesday', 1800, 2030, 'Philips 201', 30);
-INSERT INTO course VALUES (6339, 'Friday', 1600, 1830, 'Tompkins 201', 30);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (1222, 'Monday', 1030, 1145,'Philips 201', 30);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (5555, 'Thursday', 1030, 1145, 'Rome 401', 10);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (4444, 'Monday', 1130,1245, 'Tompkins 201', 30);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6221, 'Monday', 1500, 1730, 'Philips 201', 10);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6461,  'Tuesday', 1500, 1730, 'Rome 401', 30);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6212, 'Wednesday', 1500, 1730, 'Tompkins 201', 30);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6232, 'Monday', 1800, 2030, 'Philips 201', 10);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6233, 'Tuesday', 1800, 2030, 'Rome 201', 10);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6241, 'Wednesday', 1800, 2030, 'Tompkins 201', 10);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6242, 'Friday', 1800, 2030, 'Rome 401', 30);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6246, 'Tuesday', 1500, 1730, 'Rome 401', 10);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6251, 'Monday', 1800, 2030, 'Tompkins 201', 30);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6254, 'Monday', 1530, 1800, 'Philips 201', 30);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6260, 'Friday', 1800, 2030, 'Rome 401', 10);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6262, 'Wednesday', 1800, 2030, 'Tompkins 201', 30);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6283, 'Tuesday', 1800, 2030, 'Philips 201', 30);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6284, 'Monday', 1800, 2030, 'Tompkins 201', 30);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6286, 'Wednesday', 1800, 2030, 'Rome 401', 10);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6384, 'Wednesday', 1500, 1730, 'Philips 201', 30);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6210, 'Wednesday', 1800, 2030, 'Philips 201', 30);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6339, 'Friday', 1600, 1830, 'Tompkins 201', 30);
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6325, 'Wednesday', 1500, 1730, 'Tompkins 201', 30); 
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6241, 'Monday', 1800, 2030, 'Tompkins 201', 30); 
+INSERT INTO course(cid, day, starttime, endtime, location, section) VALUES (6242, 'Tuesday', 1800, 2030, 'Tompkins 201', 30); 
 
 
 
 
 
-INSERT INTO coursedata VALUES (1222, 21, 'Humanities', 'Philosophy', 3, 'Fall', 44444444);
-INSERT INTO coursedata VALUES (5555, 22, 'Physics', 'Physics 101', 4, 'Fall', 44444444);
-INSERT INTO coursedata VALUES (4444, 23, 'Psychology', 'Mind 101', 3, 'Fall', 44444444);
-INSERT INTO coursedata VALUES (6221, 1, 'CSCI', 'SW Paradigms', 3, 'Fall', 10101010);
-INSERT INTO coursedata VALUES (6461, 2, 'CSCI', 'Computer Architecture', 3, 'Fall', 10101010);
-INSERT INTO coursedata VALUES (6212, 3, 'CSCI', 'Algorithms', 3, 'Fall', 20202020);
-INSERT INTO coursedata VALUES (6232, 4, 'CSCI', 'Networks 1', 3, 'Fall', 32323232);
-INSERT INTO coursedata VALUES (6233, 5, 'CSCI', 'Networks 2', 3, 'Fall', 32323232);
-INSERT INTO coursedata VALUES (6241, 6, 'CSCI', 'Database 1', 3, 'Fall', 10101010);
-INSERT INTO coursedata VALUES (6242, 7, 'CSCI', 'Database 2', 3, 'Fall', 10101010);
-INSERT INTO coursedata VALUES (6246, 8, 'CSCI', 'Compilers', 3, 'Fall', 44442222);
-INSERT INTO coursedata VALUES (6251, 9, 'CSCI', 'Cloud Computing', 3, 'Fall', 20202020);
-INSERT INTO coursedata VALUES (6254, 10, 'CSCI', 'SW Engineering', 3, 'Fall', 23232323);
-INSERT INTO coursedata VALUES (6260, 11, 'CSCI', 'Multimedi', 3, 'Fall', 44442222);
-INSERT INTO coursedata VALUES (6262, 12, 'CSCI', 'Graphics 1', 3, 'Fall', 44442222);
-INSERT INTO coursedata VALUES (6283, 13, 'CSCI', 'Security 1', 3, 'Fall', 32323232);
-INSERT INTO coursedata VALUES (6284, 14, 'CSCI', 'Cryptography', 3, 'Fall', 32323232);
-INSERT INTO coursedata VALUES (6286, 15, 'CSCI', 'Network Security', 3, 'Fall', 10101010);
-INSERT INTO coursedata VALUES (6384, 16, 'CSCI', 'Cryptography 2', 3, 'Fall', 32323232);
-INSERT INTO coursedata VALUES (6241, 17, 'ECE', 'Communication Theory', 3, 'Fall', 44444444);
-INSERT INTO coursedata VALUES (6242, 18, 'ECE', 'Information Theory', 3, 'Fall', 44442222);
-INSERT INTO coursedata VALUES (6210, 19, 'MATH', 'Logic', 2, 'Fall', 20202020);
-INSERT INTO coursedata VALUES (6339, 20, 'CSCI', 'Embedded Systems', 3, 'Fall', 23232323);
+INSERT INTO coursedata VALUES (1, 1222, 'Humanities', 'Philosophy', 3, 'Fall', 44442222);
+INSERT INTO coursedata VALUES (2, 5555, 'Physics', 'Physics 101', 4, 'Fall', 44442222);
+INSERT INTO coursedata VALUES (3, 4444, 'Psychology', 'Mind 101', 3, 'Fall', 44442222);
+INSERT INTO coursedata VALUES (4, 6221, 'CSCI', 'SW Paradigms', 3, 'Fall', 10101010);
+INSERT INTO coursedata VALUES (5, 6461, 'CSCI', 'Computer Architecture', 3, 'Fall', 10101010);
+INSERT INTO coursedata VALUES (6, 6212, 'CSCI', 'Algorithms', 3, 'Fall', 20202020);
+INSERT INTO coursedata VALUES (7, 6232, 'CSCI', 'Networks 1', 3, 'Fall', 11110000);
+INSERT INTO coursedata VALUES (8, 6233, 'CSCI', 'Networks 2', 3, 'Fall', 11110000);
+INSERT INTO coursedata VALUES (9, 6241, 'CSCI', 'Database 1', 3, 'Fall', 10101010);
+INSERT INTO coursedata VALUES (10, 6242, 'CSCI', 'Database 2', 3, 'Fall', 10101010);
+INSERT INTO coursedata VALUES (11, 6246, 'CSCI', 'Compilers', 3, 'Fall', 44442222);
+INSERT INTO coursedata VALUES (12, 6251, 'CSCI', 'Cloud Computing', 3, 'Fall', 20202020);
+INSERT INTO coursedata VALUES (13, 6254, 'CSCI', 'SW Engineering', 3, 'Fall', 10101010);
+INSERT INTO coursedata VALUES (14, 6260, 'CSCI', 'Multimedi', 3, 'Fall', 44442222);
+INSERT INTO coursedata VALUES (15, 6262, 'CSCI', 'Graphics 1', 3, 'Fall', 44442222);
+INSERT INTO coursedata VALUES (16, 6283, 'CSCI', 'Security 1', 3, 'Fall', 11110000);
+INSERT INTO coursedata VALUES (17, 6284, 'CSCI', 'Cryptography', 3, 'Fall', 11110000);
+INSERT INTO coursedata VALUES (18, 6286, 'CSCI', 'Network Security', 3, 'Fall', 10101010);
+INSERT INTO coursedata VALUES (19, 6384, 'CSCI', 'Cryptography 2', 3, 'Fall', 11110000);
+INSERT INTO coursedata VALUES (20, 6210, 'MATH', 'Logic', 2, 'Fall', 20202020);
+INSERT INTO coursedata VALUES (21, 6339, 'CSCI', 'Embedded Systems', 3, 'Fall', 10101010);
+INSERT INTO coursedata VALUES (22, 6325, 'CSCI', 'Algorithms 2', 3, 'Fall', 44442222);
+INSERT INTO coursedata VALUES (23, 6241, 'ECE', 'Communication Theory', 3, 'Fall', 44442222);
+INSERT INTO coursedata VALUES (24, 6242, 'ECE', 'Information Theory', 3, 'Fall', 44442222);
 
 
 
@@ -165,29 +170,26 @@ INSERT INTO room VALUES ('Rome 401', 50);
 INSERT INTO room VALUES ('Tompkins 201', 25);
 
 
-INSERT INTO prereqs VALUES (5555, 1222);
-INSERT INTO prereqs VALUES (4444, 1222);
-INSERT INTO prereqs VALUES (6233, 6232);
-INSERT INTO prereqs VALUES (6242, 6241);
-INSERT INTO prereqs VALUES (6246, 6461);
-INSERT INTO prereqs VALUES (6246, 6212);
-INSERT INTO prereqs VALUES (6251, 6461);
-INSERT INTO prereqs VALUES (6254, 6221);
-INSERT INTO prereqs VALUES (6283, 6212);
-INSERT INTO prereqs VALUES (6284, 6212);
-INSERT INTO prereqs VALUES (6286, 6283);
-INSERT INTO prereqs VALUES (6286, 6232);
-INSERT INTO prereqs VALUES (6325, 6212);
-INSERT INTO prereqs VALUES (6339, 6461);
-INSERT INTO prereqs VALUES (6339, 6212);
-INSERT INTO prereqs VALUES (6384, 6284);
+INSERT INTO prereqs VALUES (8, 7);
+INSERT INTO prereqs VALUES (10, 9);
+INSERT INTO prereqs VALUES (11, 5);
+INSERT INTO prereqs VALUES (11, 6);
+INSERT INTO prereqs VALUES (12, 5);
+INSERT INTO prereqs VALUES (13, 4);
+INSERT INTO prereqs VALUES (16, 6);
+INSERT INTO prereqs VALUES (17, 6);
+INSERT INTO prereqs VALUES (18, 16);
+INSERT INTO prereqs VALUES (18, 7);
+INSERT INTO prereqs VALUES (19, 17);
+INSERT INTO prereqs VALUES (21, 5);
+INSERT INTO prereqs VALUES (21, 6);
+INSERT INTO prereqs VALUES (22, 6);
 
 
+INSERT INTO coreqs VALUES (22, 21);
+INSERT INTO coreqs VALUES (23, 21);
 
-INSERT INTO coreqs VALUES (5555, 1222);
-INSERT INTO coreqs VALUES (4444, 1222);
 
-
-INSERT INTO lab VALUES (5555, 1333);
-INSERT INTO lab VALUES (4444, 1332);
-INSERT INTO lab VALUES (1222, 1331);
+INSERT INTO lab VALUES (22, 0);
+INSERT INTO lab VALUES (23, 0);
+INSERT INTO lab VALUES (21, 0);

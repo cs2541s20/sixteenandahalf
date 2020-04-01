@@ -69,6 +69,14 @@ font-family: "Helvetica Neue", Helvetica, sans-serif;
 color: #444;   
 -webkit-font-smoothing: antialiased;    background: #f0f0f0;
 }
+
+.error_msg {
+ 	font-weight: bold;
+        font-size: large;
+}
+
+
+
 #container {
 
 

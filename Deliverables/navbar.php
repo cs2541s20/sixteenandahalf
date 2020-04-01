@@ -1,6 +1,16 @@
+<?php
+$filename = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
 
+if($filename == 'navbar.php'){
+        if(isset($_SESSION['uid'])){
+                header('Location: index.php');
+        }
+        else{
+                header('Location: login.php');
+        }
+}
 
-
+?>
 
 
 
@@ -36,11 +46,9 @@ header img {
 main {
     color: white; 
 
-
 }
 header {
    background-color: white;
-  
     position: fixed;
     top: 0;
     left: 0;
@@ -49,7 +57,6 @@ header {
     display: flex;
     text-align: center; 
   box-shadow: 2px -3px 22px 1px black;
-  /*  box-shadow: 0 0 25px 0 black; */
 
 }
 div.navdiv {
@@ -136,24 +143,24 @@ header  {
 
 	if(isset($_SESSION['type']) && $_SESSION['type'] == 'admin'){
 		if($_SESSION['viewuid'] == $_SESSION['uid']){
-			debuginfo();
+			//debuginfo();
 			setsysadmin(false);
 		}
 		else{
 			if($_SESSION['viewtype'] ==  'admin'){
-				debuginfo();
+				//debuginfo();
 				setsysadmin(true);
 			}
 			if($_SESSION['viewtype'] == 'gradsec'){
-				debuginfo();
+				//debuginfo();
 				setgradsec(true);
 			}
 			if($_SESSION['viewtype'] ==  'faculty'){
-				debuginfo();
+				//debuginfo();
 				setfaculty(true);
 			}
 			if($_SESSION['viewtype'] == 'student'){
-				debuginfo();
+				//debuginfo();
 				setstudent(true);
 			}		
 		}
@@ -161,32 +168,32 @@ header  {
 
 	else if(isset($_SESSION['type']) && $_SESSION['type'] == 'gradsec'){
 		if($_SESSION['viewuid'] == $_SESSION['uid']){
-			debuginfo();
+			//debuginfo();
 			setsysadmin(false);
 		}
 		else{
 			if($_SESSION['viewtype'] == 'gradsec'){
-				debuginfo();
+				//debuginfo();
 				setgradsec(true);
 			}
 			if($_SESSION['viewtype'] ==  'faculty'){
-				debuginfo();
+				//debuginfo();
 				setfaculty(true);
 			}
 			if($_SESSION['viewtype'] == 'student'){
-				debuginfo();
+				//debuginfo();
 				setstudent(true);
 			}		
 		}
 	}
 
 	else if(isset($_SESSION['type']) && $_SESSION['type'] == 'faculty' /*&& $_SESSION['viewuid'] != $_SESSION['uid']*/){
-		debuginfo();
+		//debuginfo();
 		setfaculty(false);
 	}
 	
 	else if(isset($_SESSION['type']) && $_SESSION['type'] == 'student'){
-		debuginfo();
+		//debuginfo();
 		setstudent(false);
 	}	
 	
@@ -250,9 +257,11 @@ header  {
 		$navbar[5] = "logout.php";
 		$navbar[6] = "My Courses";
 		$navbar[7] = "mycourses.php";
+		$navbar[8] = "Edit Grades";
+		$navbar[9] = "examplegradechange.php";
 		if($needsHome == true){
-			$navbar[8] = "Back to my Account";
-			$navbar[9] = "home.php";
+			$navbar[10] = "Back to my Account";
+			$navbar[11] = "home.php";
 		}
 
 		$_SESSION['navbar'] = $navbar;
