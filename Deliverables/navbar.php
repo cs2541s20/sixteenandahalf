@@ -1,4 +1,118 @@
 <?php
+$filename = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
+
+if($filename == 'navbar.php'){
+        if(isset($_SESSION['uid'])){
+                header('Location: index.php');
+        }
+        else{
+                header('Location: login.php');
+        }
+}
+
+?>
+
+
+
+<html>
+<head>
+        <link rel="stylesheet" href="style.css">
+</head>
+     <body>
+	<header>
+    <img src="logoIndex.png">
+	</header>
+     </body>
+<style>
+header img {
+    height: 80px;
+}
+header img {
+    height: 80px;
+}
+body {
+    height: 125vh;
+    background-image: url("backgroundNAV.jpg");
+    background-size: cover;
+    font-family: sans-serif;
+    margin-top: 80px;
+    padding: 30px;
+
+}
+header img {
+    height: 80px;
+}
+
+main {
+    color: white; 
+
+}
+header {
+   background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    display: flex;
+    text-align: center; 
+  box-shadow: 2px -3px 22px 1px black;
+
+}
+div.navdiv {
+	
+	top: 25px;
+	position: fixed;
+	left: 120;
+       	z-index: 1;
+        color: black;
+        text-decoration: none;        	
+	text-shadow:0px 0px 1px #FFF;
+	line-height: 80px;
+	text-decoration: none;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 29px;
+	color: #371C1C;
+
+	text-decoration:none;
+	color:#222;
+	padding:2px 2px 2px 4px;
+	margin:2px;
+	display:block;
+
+}
+
+
+
+ .welcome  {
+        position: fixed;
+	top: 14px;
+	left: 600;
+        z-index: 1;
+        color: black;
+        text-decoration: none;
+ }
+
+header navlink {
+    display: inline;
+}
+header navlink  {
+    margin: 20px;
+}
+header  {
+    color: black;
+    text-decoration: none;
+}
+
+</style>
+
+</html>
+
+
+
+
+
+<?php
 
 	//$filename = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1); 
 	
@@ -29,24 +143,24 @@
 
 	if(isset($_SESSION['type']) && $_SESSION['type'] == 'admin'){
 		if($_SESSION['viewuid'] == $_SESSION['uid']){
-			debuginfo();
+			//debuginfo();
 			setsysadmin(false);
 		}
 		else{
 			if($_SESSION['viewtype'] ==  'admin'){
-				debuginfo();
+				//debuginfo();
 				setsysadmin(true);
 			}
 			if($_SESSION['viewtype'] == 'gradsec'){
-				debuginfo();
+				//debuginfo();
 				setgradsec(true);
 			}
 			if($_SESSION['viewtype'] ==  'faculty'){
-				debuginfo();
+				//debuginfo();
 				setfaculty(true);
 			}
 			if($_SESSION['viewtype'] == 'student'){
-				debuginfo();
+				//debuginfo();
 				setstudent(true);
 			}		
 		}
@@ -54,32 +168,32 @@
 
 	else if(isset($_SESSION['type']) && $_SESSION['type'] == 'gradsec'){
 		if($_SESSION['viewuid'] == $_SESSION['uid']){
-			debuginfo();
+			//debuginfo();
 			setsysadmin(false);
 		}
 		else{
 			if($_SESSION['viewtype'] == 'gradsec'){
-				debuginfo();
+				//debuginfo();
 				setgradsec(true);
 			}
 			if($_SESSION['viewtype'] ==  'faculty'){
-				debuginfo();
+				//debuginfo();
 				setfaculty(true);
 			}
 			if($_SESSION['viewtype'] == 'student'){
-				debuginfo();
+				//debuginfo();
 				setstudent(true);
 			}		
 		}
 	}
 
 	else if(isset($_SESSION['type']) && $_SESSION['type'] == 'faculty' /*&& $_SESSION['viewuid'] != $_SESSION['uid']*/){
-		debuginfo();
+		//debuginfo();
 		setfaculty(false);
 	}
 	
 	else if(isset($_SESSION['type']) && $_SESSION['type'] == 'student'){
-		debuginfo();
+		//debuginfo();
 		setstudent(false);
 	}	
 	
@@ -130,8 +244,7 @@
 		else{
 			$navbar[8] = "Other Accounts";
 			$navbar[9] = "otheraccounts.php";
-		}		
-		$_SESSION['navbar'] = $navbar;
+		}		$_SESSION['navbar'] = $navbar;
 	}
 	
 	function setfaculty($needsHome){
@@ -144,8 +257,8 @@
 		$navbar[5] = "logout.php";
 		$navbar[6] = "My Courses";
 		$navbar[7] = "mycourses.php";
-		$navbar[8] = "Modify Grades";
-		$navbar[9] = "changegrades.php";
+		$navbar[8] = "Edit Grades";
+		$navbar[9] = "examplegradechange.php";
 		if($needsHome == true){
 			$navbar[10] = "Back to my Account";
 			$navbar[11] = "home.php";
@@ -170,6 +283,7 @@
 			$navbar[10] = "Back to my Account";
 			$navbar[11] = "home.php";
 		}
+
 		$_SESSION['navbar'] = $navbar;
 	}
 
@@ -213,9 +327,11 @@ function navbar(){
 		}
 		console.log("The value is: \"" + loggedin + "\"");
 		var navdiv = document.createElement("DIV");
-		navdiv.className = "navmenu";
+		navdiv.className = "navdiv";
 		var navtable = document.createElement("TABLE");
+		navtable.className = "navtable";
 		var navtr = document.createElement("TR");
+		navtr.className = "navtablerow";
 		var navname = <?php echo json_encode($_SESSION['navbar']); ?>;
 		for(var i = 0; i<navname.length; i+=2){
 			if(window.location.href.includes(navname[i+1])){
@@ -223,10 +339,11 @@ function navbar(){
 			}
 			if(navname[i] != ""){
 				var navtd = document.createElement("TD");
+				navtd.className = "navtd";
 				var minicontainer = document.createElement("DIV");
 				minicontainer.className = "navitem";
 				var navlink = document.createElement("A");
-				navlink.className = "navitem";
+				navlink.className = "navlink";
 				navlink.innerHTML = navname[i];
 				navlink.href = navname[i+1];
 				minicontainer.appendChild(navlink);

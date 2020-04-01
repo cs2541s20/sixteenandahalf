@@ -1,10 +1,5 @@
 
 
-
-
-
-
-
 <?php
 
   require_once('connectvars.php');
@@ -30,19 +25,19 @@
      if (!empty($user_id) && !empty($user_password)) {
         // This is where you query to see if the username password combination
         $query = "select * from users where uid = '$user_id' and password = '$user_password'";
-	$data = mysqli_query($dbc, $query);
+  $data = mysqli_query($dbc, $query);
 
         // If The log-in is OK
         if (mysqli_num_rows($data) == 1) {
 
 
           $row = mysqli_fetch_array($data);
-		
-	  $_SESSION['uid'] = $row['uid'];
-	  $_SESSION['viewuid'] = $row['uid'];
-	  $_SESSION['viewtype'] = $row['permission'];
-	  $_SESSION['type'] = $row['permission'];
-	  $_SESSION['name'] = $row['fname'] . " " . $row['lname'];
+    
+    $_SESSION['uid'] = $row['uid'];
+    $_SESSION['viewuid'] = $row['uid'];
+    $_SESSION['viewtype'] = $row['permission'];
+    $_SESSION['type'] = $row['permission'];
+    $_SESSION['name'] = $row['fname'] . " " . $row['lname'];
           $home_url = 'index.php';
           header('Location: ' . $home_url);
         }
@@ -74,6 +69,14 @@ font-family: "Helvetica Neue", Helvetica, sans-serif;
 color: #444;   
 -webkit-font-smoothing: antialiased;    background: #f0f0f0;
 }
+
+.error_msg {
+ 	font-weight: bold;
+        font-size: large;
+}
+
+
+
 #container {
 
 

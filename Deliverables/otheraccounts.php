@@ -15,6 +15,8 @@ if($_SESSION['viewtype'] != 'gradsec' && $_SESSION['viewtype'] != 'admin'){
 require_once("navbar.php");
 require_once("connectvars.php");
 
+echo "<br/>Search for a user by UserID or Last Name:<br/><br/>";
+
 
 if(isset($_POST['search']) && !empty($_POST['search'])){
 		$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -32,8 +34,12 @@ if(isset($_POST['search']) && !empty($_POST['search'])){
 			$query = "select concat(fname, ' ', lname) as name, uid from users where lname like '%" . $trimmedsearch . "%' or uid like '%" . $trimmedsearch . "%'";
 		}
 		$data = mysqli_query($dbc, $query);
+		
 		if (!$data) {
     			echo "Error:" .  mysqli_error($dbc);
+		}
+		if(mysqli_num_rows($data) == 0){
+			echo "No results found. Search for a different user?";
 		}
 		$_SESSION['unextracteddata'] = $data;
 		$returnable = array();

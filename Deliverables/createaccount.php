@@ -1,4 +1,3 @@
-//start the index page
 <?php
 session_start();
 if(!isset($_SESSION['uid'])){
@@ -10,47 +9,97 @@ else if($_SESSION['type'] != 'admin'){
 
 require_once('connectvars.php');
 require_once("navbar.php");
-$user_id = $_SESSION['uid'];
-?>
-
-
-<?php 
-
-if(isset($_POST['firstname'])){
-
-$firstname = $_POST['firstname'];
-if(preg_match("/^[A-Z][a-zA-Z -]+$/", $_POST["firstname"]) === 0) {
-$errName = '<p class="errText">Name must be from letters, dashes, spaces and must not start with dash</p>';
-echo 'Name must be from letters, dashes, spaces and must not start with dash <br/>';
-}
-}
+$user_id = $_SESSION['viewuid'];
 ?>
 
 
 <?php
-$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 if(isset($_POST['Create_Account'])){
-    $user_email = mysqli_real_escape_string($dbc, trim($_POST['email']));
-    $query = "SELECT * from users where email ='$user_email'";
-    $data = mysqli_query($dbc, $query);
-    if($row = mysqli_fetch_array($data) == true){
-      $sql = "INSERT INTO enrollment VALUES ('$user_id', NULL, {$_POST['firsname']}, {$_POST['lastname']}, {$_POST['password']}, '$user_email', {$_POST['type_of_user']})";
-      if($dbc->query($sql) === TRUE){
-        echo  'Account Created' ;
-      }
-      else{
-        echo 'Failed to Create Account';
-      }
-      if(!$user_email){
-        echo 'No Results';
-      }
-    }
-    else{
-      echo 'Failed to Create Account';
-    }
+      
+  $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+  if (!$dbc) {
+    die("Connection failed: " . mysqli_connect_error());
+    echo "connection refused";
   }
 
+
+  $errVal = "";
+  $user_email = mysqli_real_escape_string($dbc, trim($_POST['email']));
+  if (!filter_var($user_email, FILTER_VALIDATE_EMAIL)){
+    $errVal = '1';
+    echo '<p class="errText">Invalid Email Address Entered</p>';
+  }
+  
+  $first_name = mysqli_real_escape_string($dbc, trim($_POST['firstname']));
+  if(preg_match("/^[a-zA-Z][a-zA-Z -]+$/", $first_name) === 0) {
+    $errVal = '1';
+    echo '<p class="errText">First name must be from letters, dashes, spaces and must not start with dash</p>';
+  }
+
+  $last_name = mysqli_real_escape_string($dbc, trim($_POST['lastname']));
+  if(preg_match("/^[a-zA-Z][a-zA-Z -]+$/", $last_name) === 0) {
+    $errVal = '1';
+    echo '<p class="errText">Last name must be from letters, dashes, spaces and must not start with dash</p>';
+  }
+  
+  $pass_word = mysqli_real_escape_string($dbc, $_POST['password']);
+  /*note for the poor soul reading my regex...
+   *^$ -- line boundary, must contain all of the following without anything extra on the left or right
+   *(?=........) -- positive lookahead to check that some x pattern is there. I check for a number, an uppercase and lowercase letter, and any character within that ascii range (all the possible special chars)
+   *[\x20-\x7e]{8,} -- must contain at least 8 typable characters from the ascii table.
+   *
+   * Really, this long mess just checks what is written below in the echo message. There are no capturing groups by the way, the special character positive lookahead contains (?:) for do not capture.
+   */
+  if(preg_match("/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*(?:[!-\/]|[:-@]|[[-`]|[{-~]))[ -~]{8,}$/", $pass_word) === 0) {
+    $errVal = '1';
+    echo '<p class="errText">Password must contain both uppercase and lowercase letters, a number, a special character, and be at least 8 characters long.</p>';
+  }
+
+  
+  $type_of_user = mysqli_real_escape_string($dbc, trim($_POST['type_of_user']));
+  if(preg_match("/^(student|faculty|gradsec|admin)$/", $type_of_user) === 0) {
+    $errVal = '1';
+    echo '<p class="errText">Valid user types are: student, faculty, gradsec, admin. These are case sensitive.</p>';
+  }
+  
+  $user_ID = mysqli_real_escape_string($dbc, trim($_POST['userID']));
+  if(preg_match("/^[1-9]\d{7}$/", $user_ID) === 0) {
+    $errVal = '1';
+    echo '<p class="errText"> UserID must be 8 digits exactly, and cannot start with a 0.</p>';
+  }
+
+
+  $add_ress = mysqli_real_escape_string($dbc, trim($_POST['address']));
+   if(preg_match("/^\d+ (?:\w| |\.|\-|\')+$/", $add_ress) == 0) {
+      $errVal = '1';
+      echo "<p class='errText'>Address must have the format number Street name etc. Example: 212 K St. NW</p>";
+    }
+
+    if($errVal == ''){	  
+    $sql = "select uid from users where uid = ". $user_ID;
+    $data = mysqli_query($dbc, $sql);
+    if(mysqli_num_rows($data) == 0){
+      $sql = "INSERT INTO users VALUES ('$user_ID', '$add_ress', '$first_name', '$last_name', '$pass_word', '$user_email','$type_of_user')";
+      
+      if($dbc->query($sql) === TRUE){
+	     
+	      $sql = "INSERT INTO student VALUES ('$user_ID', 'yes', 'undecided' , 'undetermined')";
+
+ 			if($dbc->query($sql) === TRUE){
+	      			echo  'Account Created.' ;
+			
+			}
+       		}
+      }
+    else{
+      echo 'Failed to Create Account. Account ID already exists.';
+    }
+  }
+  else{
+    echo "Please fix the above issues, and then retry creating the account.";
+  }
+}
 
 
 ?>
@@ -67,33 +116,35 @@ if(isset($_POST['Create_Account'])){
 <body>
   <h2>Create Account</h2>
 
-  <p>Create an Account:</p>
+  <p>Enter New Account Information:</p>
   <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-    <label for="firstname">First name:</label>
+    <label for="firstname">First Name:</label>
     <input type="text" name="firstname" /><br />
    
 
-    <label for="lastname">Last name:</label>
+    <label for="lastname">Last Name:</label>
     <input type="text" name="lastname" /><br />
-    <label for="email">What is your email address?</label>
+    <label for="email">Email Address:</label>
     <input type="text" name="email" /><br />
     
     
-    <label for="type of user">What type of user?</label>
+    <label for="type of user">Type of User:</label>
     <input type="text" name="type_of_user" /><br />
 
-    <label for="userID">Enter userID:</label>
-    <input type="text" name="userID" size="32" /><br />
+    <label for="userrID">Enter UserID:</label>
+    <input type="number" name="userID" size="8" /><br />
 
-    <label for="password">Enter password?</label>
+    <label for="password">Enter Password:</label>
     <input type="text" name="password" size="32" /><br />
 
-    <label for="other">Anything else you want to add?</label>
-    <textarea name="other"></textarea><br />
-    
+    <label for="address">Enter Address:</label>
+    <input type="text" name="address" size="32" /><br />
 
     <input type="submit" value="Create Account" name="Create_Account" /><br/><br/>
   </form>
+
+
+<img src="createGuidlines.png" alt="Guidlines" width="650" height="200">
 </body>
 </html>
 
